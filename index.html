@@ -387,6 +387,8 @@ function nuevoPerfil(nombre){
 function guardar(){ if(E){ BD.perfiles[E.nombre]=E; } localStorage.setItem(CLAVE, JSON.stringify(BD)); }
 
 function cargar(){
+  let palabrasExtra = JSON.parse(localStorage.getItem("palabrasExtra") || "[]");
+  if(palabrasExtra.length > 0) TODAS.push(...palabrasExtra);
   cargarPalabrasDeSheets();
   if(BD.actual && BD.perfiles[BD.actual]){
     E = BD.perfiles[BD.actual];
@@ -889,8 +891,12 @@ function guardarPalabraNueva(){
   const ejEn = document.getElementById("npEjemploEn").value.trim();
   const ejEs = document.getElementById("npEjemploEs").value.trim();
   if(!es||!en||!emoji||!tema){alert("Completa todos los campos");return;}
-  TODAS.push({es,en,emoji,exEn:ejEn,exEs:ejEs,cat:tema.toLowerCase(),catNombre:tema,color:"#ec4899"});
-  alert("Palabra agregada. Total: "+TODAS.length);
+  const palabra = {es,en,emoji,exEn:ejEn,exEs:ejEs,cat:tema.toLowerCase(),catNombre:tema,color:"#ec4899"};
+  TODAS.push(palabra);
+  let palabrasExtra = JSON.parse(localStorage.getItem("palabrasExtra") || "[]");
+  palabrasExtra.push(palabra);
+  localStorage.setItem("palabrasExtra", JSON.stringify(palabrasExtra));
+  alert("Palabra agregada y guardada. Total: "+TODAS.length);
   document.getElementById("npEspanol").value="";
   document.getElementById("npIngles").value="";
   document.getElementById("npEmoji").value="";
