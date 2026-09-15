@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cruzando Fronteras de Lenguaje</title>
+<style>
+:root{
+  --bg:#f4f1fb; --card:#ffffff; --tinta:#2b2440; --suave:#6b647f;
+  --morado:#7c3aed; --morado2:#a78bfa; --rosa:#ec4899; --verde:#10b981;
+  --rojo:#ef4444; --amar:#f59e0b; --borde:#e8e3f5; --sombra:0 6px 22px rgba(80,50,160,.10);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--tinta); min-height:100vh;
+  font-family:"Segoe UI Variable Display","Segoe UI",system-ui,-apple-system,sans-serif;
+  padding-bottom:88px;
+}
+.wrap{max-width:820px;margin:0 auto;padding:14px}
+
+/* ---------- cabecera ---------- */
+header.top{
+  background:linear-gradient(135deg,var(--morado),var(--rosa));
+  color:#fff;border-radius:0 0 26px 26px;padding:18px 16px 22px;
+  box-shadow:var(--sombra);
+}
+header.top .wrap{padding:0}
+.marca{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.05rem;letter-spacing:.2px}
+.marca .globo{font-size:1.5rem}
+.subt{opacity:.9;font-size:.8rem;margin-top:2px}
+.fila-chips{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.chip{
+  background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.28);
+  border-radius:999px;padding:6px 12px;font-size:.78rem;font-weight:700;
+  display:flex;align-items:center;gap:6px;backdrop-filter:blur(4px)
+}
+
+/* ---------- tarjetas ---------- */
+.card{
+  background:var(--card);border:1px solid var(--borde);border-radius:20px;
+  padding:18px;box-shadow:var(--sombra);margin-top:14px
+}
+h2{margin:0 0 4px;font-size:1.15rem}
+.lead{color:var(--suave);font-size:.88rem;margin:0 0 14px;line-height:1.5}
+
+/* ---------- botones ---------- */
+.btn{
+  border:0;border-radius:14px;padding:13px 18px;font-size:.95rem;font-weight:700;
+  cursor:pointer;font-family:inherit;transition:transform .08s, filter .15s;
+}
+.btn:active{transform:scale(.97)}
+.btn-p{background:linear-gradient(135deg,var(--morado),var(--rosa));color:#fff}
+.btn-s{background:#f1ecfd;color:var(--morado);border:1px solid var(--borde)}
+.btn-g{background:var(--verde);color:#fff}
+.btn-full{width:100%}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+
+input[type=text]{
+  width:100%;padding:14px 16px;border-radius:14px;border:2px solid var(--borde);
+  font-size:1.05rem;font-family:inherit;background:#fbfaff;color:var(--tinta);outline:none
+}
+input[type=text]:focus{border-color:var(--morado2)}
+
+/* ---------- menú principal ---------- */
+.menu{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}
+@media(min-width:620px){.menu{grid-template-columns:repeat(3,1fr)}}
+.tile{
+  background:var(--card);border:1px solid var(--borde);border-radius:20px;padding:16px 14px;
+  text-align:left;cursor:pointer;box-shadow:var(--sombra);transition:transform .1s
+}
+.tile:active{transform:scale(.97)}
+.tile .ic{font-size:1.9rem;display:block;margin-bottom:6px}
+.tile b{display:block;font-size:.98rem}
+.tile span.d{color:var(--suave);font-size:.76rem;line-height:1.35;display:block;margin-top:3px}
+
+/* ---------- pensar primero ---------- */
+.pista{
+  background:#f8f5ff;border:1px dashed var(--morado2);border-radius:14px;
+  padding:12px 14px;margin-top:10px;font-size:.92rem;animation:pop .25s ease
+}
+@keyframes pop{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.emojigrande{font-size:4rem;text-align:center;margin:6px 0 2px}
+.palabra-es{text-align:center;font-size:1.7rem;font-weight:800;margin:0 0 2px}
+.cat-tag{text-align:center;color:var(--suave);font-size:.8rem;margin-bottom:12px}
+.aviso{border-radius:14px;padding:13px 15px;margin-top:12px;font-size:.92rem;line-height:1.5}
+.ok{background:#e7f9f1;border:1px solid #a7e8cd;color:#0a6b4a}
+.mal{background:#fdecec;border:1px solid #f6bcbc;color:#9b1c1c}
+.info{background:#eef4ff;border:1px solid #c5d8fb;color:#1e40af}
+
+/* ---------- opciones ---------- */
+.ops{display:grid;gap:10px;margin-top:14px}
+.op{
+  text-align:left;background:#fbfaff;border:2px solid var(--borde);border-radius:14px;
+  padding:14px 16px;font-size:1rem;font-weight:600;cursor:pointer;font-family:inherit;color:var(--tinta)
+}
+.op:hover{border-color:var(--morado2)}
+.op.buena{background:#e7f9f1;border-color:var(--verde);color:#0a6b4a}
+.op.mala{background:#fdecec;border-color:var(--rojo);color:#9b1c1c}
+
+/* ---------- barras ---------- */
+.barra{height:12px;border-radius:99px;background:#eee7fb;overflow:hidden;margin-top:6px}
+.barra > i{display:block;height:100%;border-radius:99px;transition:width .5s}
+.rowcat{margin-bottom:12px}
+.rowcat .t{display:flex;justify-content:space-between;font-size:.86rem;font-weight:600}
+
+/* ---------- medallas ---------- */
+.medallas{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px;margin-top:10px}
+.med{text-align:center;border:1px solid var(--borde);border-radius:16px;padding:12px 6px;background:#fbfaff}
+.med.off{filter:grayscale(1);opacity:.4}
+.med .e{font-size:1.7rem}
+.med .n{font-size:.7rem;font-weight:700;margin-top:4px;line-height:1.2}
+
+/* ---------- diccionario ---------- */
+.filtros{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:10px}
+.filtros button{
+  white-space:nowrap;border:1px solid var(--borde);background:#fff;border-radius:999px;
+  padding:8px 14px;font-size:.82rem;font-weight:700;cursor:pointer;font-family:inherit;color:var(--suave)
+}
+.filtros button.act{background:var(--morado);color:#fff;border-color:var(--morado)}
+.wlist{display:grid;gap:8px;max-height:60vh;overflow-y:auto}
+.w{display:flex;align-items:center;gap:10px;border:1px solid var(--borde);border-radius:14px;padding:10px 12px;background:#fff}
+.w .e{font-size:1.5rem}
+.w .txt{flex:1;min-width:0}
+.w .txt b{display:block;font-size:.98rem}
+.w .txt span{color:var(--suave);font-size:.82rem}
+.w .snd{border:0;background:#f1ecfd;border-radius:10px;padding:8px 10px;cursor:pointer;font-size:1rem}
+.w.dom{background:#f2fdf8;border-color:#a7e8cd}
+
+/* ---------- tabla profe ---------- */
+table{width:100%;border-collapse:collapse;font-size:.84rem;margin-top:10px}
+th,td{padding:9px 8px;text-align:left;border-bottom:1px solid var(--borde)}
+th{color:var(--suave);font-size:.74rem;text-transform:uppercase;letter-spacing:.4px}
+.scrollx{overflow-x:auto}
+
+/* ---------- barra inferior ---------- */
+nav.bottom{
+  position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--borde);
+  display:flex;justify-content:space-around;padding:8px 4px calc(8px + env(safe-area-inset-bottom));z-index:20
+}
+nav.bottom button{
+  border:0;background:none;font-family:inherit;color:var(--suave);font-size:.68rem;font-weight:700;
+  display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:4px 10px;border-radius:12px
+}
+nav.bottom button .i{font-size:1.25rem}
+nav.bottom button.act{color:var(--morado);background:#f5f1fe}
+
+.hidden{display:none !important}
+.centro{text-align:center}
+.mini{font-size:.76rem;color:var(--suave)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.kpi{background:#fbfaff;border:1px solid var(--borde);border-radius:16px;padding:12px;text-align:center}
+.kpi b{display:block;font-size:1.6rem;color:var(--morado)}
+.kpi span{font-size:.72rem;color:var(--suave)}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="marca"><span class="globo">🌍</span><div>
+      Cruzando Fronteras de Lenguaje
+      <div class="subt" id="saludo">Aprende inglés de verdad, no lo traduzcas</div>
+    </div></div>
+    <div class="fila-chips">
+      <div class="chip">🔥 <span id="chipRacha">0</span> días</div>
+      <div class="chip">🧠 <span id="chipPal">0</span>/200 palabras mías</div>
+      <div class="chip">⏱️ <span id="chipMin">0</span> min</div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<!-- ====================== INICIO ====================== -->
+<section id="s-inicio">
+  <div class="card" id="cardNombre">
+    <h2>¡Hola! ¿Cómo te llamas?</h2>
+    <p class="lead">Escribe tu nombre para guardar tu progreso en esta computadora.</p>
+    <input type="text" id="inNombre" placeholder="Tu nombre" autocomplete="off">
+    <button class="btn btn-p btn-full" style="margin-top:10px" onclick="guardarNombre()">Empezar 🚀</button>
+  </div>
+
+  <div class="card">
+    <h2>El reto de hoy</h2>
+    <p class="lead" id="retoHoy">Cargando…</p>
+    <button class="btn btn-p btn-full" onclick="ir('pensar')">Practicar ahora</button>
+  </div>
+
+  <div class="menu">
+    <button class="tile" onclick="ir('pensar')"><span class="ic">🤔</span><b>Piensa Primero</b><span class="d">El traductor que te hace intentarlo antes</span></button>
+    <button class="tile" onclick="ir('retos')"><span class="ic">🎯</span><b>Retos</b><span class="d">Imágenes, audio y frases</span></button>
+    <button class="tile" onclick="ir('errores')"><span class="ic">🕵️</span><b>Cazador de Errores</b><span class="d">Corrige al traductor automático</span></button>
+    <button class="tile" onclick="ir('dic')"><span class="ic">📒</span><b>Mi diccionario</b><span class="d">Mis 200 palabras con audio</span></button>
+    <button class="tile" onclick="ir('progreso')"><span class="ic">🏅</span><b>Mi progreso</b><span class="d">Medallas y estadísticas</span></button>
+    <button class="tile" onclick="ir('profe')"><span class="ic">👩‍🏫</span><b>Modo profesora</b><span class="d">Resultados del salón</span></button>
+  </div>
+</section>
+
+<!-- ====================== PIENSA PRIMERO ====================== -->
+<section id="s-pensar" class="hidden">
+  <div class="card">
+    <h2>🤔 Piensa Primero</h2>
+    <p class="lead">Escribe una palabra en español. <b>No te la voy a traducir de una</b>: primero te doy pistas y tú intentas. Así sí se aprende.</p>
+    <input type="text" id="inBuscar" placeholder="Ejemplo: mariposa" autocomplete="off">
+    <div class="grid2" style="margin-top:10px">
+      <button class="btn btn-p" onclick="buscarPalabra()">Buscar</button>
+      <button class="btn btn-s" onclick="palabraSorpresa()">🎲 Sorpréndeme</button>
+    </div>
+    <div id="buscarAviso"></div>
+  </div>
+
+  <div class="card hidden" id="cardPensar">
+    <div class="emojigrande" id="pEmoji">❓</div>
+    <div class="palabra-es" id="pEs">—</div>
+    <div class="cat-tag" id="pCat">—</div>
+
+    <div id="pPistas"></div>
+
+    <input type="text" id="pIntento" placeholder="¿Cómo se dice en inglés?" autocomplete="off" style="margin-top:14px">
+    <div class="grid2" style="margin-top:10px">
+      <button class="btn btn-g" onclick="revisarIntento()">Revisar</button>
+      <button class="btn btn-s" id="btnPista" onclick="darPista()">💡 Otra pista</button>
+    </div>
+    <div id="pResultado"></div>
+    <button class="btn btn-p btn-full hidden" id="btnSiguiente" style="margin-top:10px" onclick="palabraSorpresa()">Otra palabra ➜</button>
+  </div>
+</section>
+
+<!-- ====================== RETOS ====================== -->
+<section id="s-retos" class="hidden">
+  <div class="card" id="retoIntro">
+    <h2>🎯 Retos de 10 preguntas</h2>
+    <p class="lead">Mezcla de cuatro tipos: adivina por la imagen, del inglés al español, escucha y escribe, y completa la frase.</p>
+    <button class="btn btn-p btn-full" onclick="iniciarRetos()">Empezar reto</button>
+  </div>
+  <div class="card hidden" id="retoJuego">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <span class="mini" id="retoNum">1 / 10</span>
+      <span class="mini" id="retoPuntos">✅ 0</span>
+    </div>
+    <div class="barra" style="margin:8px 0 14px"><i id="retoBarra" style="width:0%;background:linear-gradient(90deg,var(--morado),var(--rosa))"></i></div>
+    <div id="retoCuerpo"></div>
+  </div>
+  <div class="card hidden" id="retoFin"></div>
+</section>
+
+<!-- ====================== CAZADOR DE ERRORES ====================== -->
+<section id="s-errores" class="hidden">
+  <div class="card" id="errIntro">
+    <h2>🕵️ Cazador de Errores</h2>
+    <p class="lead">Un traductor automático tradujo estas frases… y se equivocó. Tu misión: encontrar la traducción correcta y descubrir <b>por qué</b> falló.</p>
+    <button class="btn btn-p btn-full" onclick="iniciarErrores()">Empezar la misión</button>
+  </div>
+  <div class="card hidden" id="errJuego">
+    <div style="display:flex;justify-content:space-between">
+      <span class="mini" id="errNum">1 / 8</span>
+      <span class="mini" id="errPuntos">🕵️ 0</span>
+    </div>
+    <div class="barra" style="margin:8px 0 14px"><i id="errBarra" style="width:0%;background:linear-gradient(90deg,#f59e0b,#ef4444)"></i></div>
+    <div id="errCuerpo"></div>
+  </div>
+  <div class="card hidden" id="errFin"></div>
+</section>
+
+<!-- ====================== DICCIONARIO ====================== -->
+<section id="s-dic" class="hidden">
+  <div class="card">
+    <h2>📒 Mi diccionario</h2>
+    <p class="lead">Las <b>verdes</b> ya son tuyas: las acertaste dos veces sin traductor. Toca 🔊 para escuchar la pronunciación.</p>
+    <input type="text" id="inFiltro" placeholder="Buscar palabra…" autocomplete="off" oninput="pintarDic()">
+    <div class="filtros" id="filtrosCat"></div>
+    <div class="wlist" id="wlist"></div>
+  </div>
+</section>
+
+<!-- ====================== PROGRESO ====================== -->
+<section id="s-progreso" class="hidden">
+  <div class="card">
+    <h2>🏅 Mi progreso</h2>
+    <div class="grid2" style="margin-top:12px">
+      <div class="kpi"><b id="kPal">0</b><span>palabras que ya no necesito traducir</span></div>
+      <div class="kpi"><b id="kRacha">0</b><span>días seguidos practicando</span></div>
+      <div class="kpi"><b id="kMin">0</b><span>minutos en la app</span></div>
+      <div class="kpi"><b id="kAyuda">0</b><span>veces que pedí la respuesta</span></div>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Por tema</h2>
+    <p class="lead">Cuánto dominas de cada grupo de palabras.</p>
+    <div id="barrasCat"></div>
+  </div>
+  <div class="card">
+    <h2>Medallas</h2>
+    <div class="medallas" id="medallas"></div>
+  </div>
+  <div class="card">
+    <button class="btn btn-s btn-full" onclick="cambiarUsuario()">Cambiar de usuaria</button>
+  </div>
+</section>
+
+<!-- ====================== PROFE ====================== -->
+<section id="s-profe" class="hidden">
+  <div class="card" id="profeLogin">
+    <h2>👩‍🏫 Modo profesora</h2>
+    <p class="lead">Aquí se ven los resultados de todas las alumnas que usaron esta computadora. Ingresa la clave.</p>
+    <input type="text" id="inPin" placeholder="Clave" autocomplete="off">
+    <button class="btn btn-p btn-full" style="margin-top:10px" onclick="entrarProfe()">Entrar</button>
+    <p class="mini" style="margin-top:8px">Clave por defecto: <b>2026</b></p>
+  </div>
+  <div class="card hidden" id="profePanel">
+    <h2>Resultados del salón</h2>
+    <p class="lead" id="profeResumen"></p>
+    <div class="scrollx"><table id="tablaProfe"></table></div>
+    <button class="btn btn-s btn-full" style="margin-top:14px" onclick="exportarCSV()">⬇️ Descargar resultados (CSV para Excel)</button>
+  </div>
+</section>
+
+</div>
+
+<nav class="bottom">
+  <button data-nav="inicio" onclick="ir('inicio')" class="act"><span class="i">🏠</span>Inicio</button>
+  <button data-nav="pensar" onclick="ir('pensar')"><span class="i">🤔</span>Piensa</button>
+  <button data-nav="retos" onclick="ir('retos')"><span class="i">🎯</span>Retos</button>
+  <button data-nav="errores" onclick="ir('errores')"><span class="i">🕵️</span>Errores</button>
+  <button data-nav="dic" onclick="ir('dic')"><span class="i">📒</span>Palabras</button>
+  <button data-nav="progreso" onclick="ir('progreso')"><span class="i">🏅</span>Yo</button>
+</nav>
+
+<script src="datos.js"></script>
+<script>
+/* =========================================================
+   ESTADO Y GUARDADO
+   ========================================================= */
+const CLAVE = "cruzando_fronteras_v1";
+const PIN_PROFE = "2026";
+let BD = JSON.parse(localStorage.getItem(CLAVE) || '{"perfiles":{},"actual":null}');
+let E = null;               // estado de la usuaria actual
+let PANTALLA = "inicio";
+
+// índice plano de las 200 palabras
+const TODAS = [];
+
+const SHEETS_ID = "1H5H-d1qitJRlxLCo44kTv1OiVQnXg68az9pmgnLibFs";
+const SHEETS_CSV = "https://docs.google.com/spreadsheets/d/1H5H-d1qitJRlxLCo44kTv1OiVQnXg68az9pmgnLibFs/export?format=csv&gid=0";
+
+async function cargarPalabrasDeSheets() {
+  try {
+    const res = await fetch(SHEETS_CSV);
+    const csv = await res.text();
+    const lineas = csv.split("\n").slice(1).filter(l => l.trim());
+
+    lineas.forEach(linea => {
+      const p = linea.split("\t");
+      if (p.length >= 6) {
+        TODAS.push({es: p[1].trim(), en: p[2].trim(), emoji: p[3].trim(),
+                   exEn: p[4].trim(), exEs: p[5].trim(), cat: p[0].toLowerCase().replace(/\s+/g,'-'), catNombre: p[0].trim(), color: '#7c3aed'});
+      }
+    });
+    console.log("Cargadas " + TODAS.length + " palabras desde Sheets");
+  } catch (e) { console.log("Sheets offline: " + e.message); }
+}
+
+CATEGORIAS.forEach(c => c.palabras.forEach(p => TODAS.push({
+  es:p[0], en:p[1], emoji:p[2], exEn:p[3], exEs:p[4], cat:c.id, catNombre:c.nombre, color:c.color
+})));
+
+const norm = s => (s||"").toString().toLowerCase().trim()
+  .normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^a-z0-9 ]/g,"").replace(/\s+/g," ");
+const hoy = () => new Date().toISOString().slice(0,10);
+
+function nuevoPerfil(nombre){
+  return { nombre, creado:hoy(), aciertos:{}, dominadas:{}, pedidosAyuda:0,
+           intentosOk:0, intentosMal:0, retosOk:0, retosMal:0, errOk:0, errMal:0,
+           racha:0, ultimoDia:null, segundos:0, pistasUsadas:0 };
+}
+function guardar(){ if(E){ BD.perfiles[E.nombre]=E; } localStorage.setItem(CLAVE, JSON.stringify(BD)); }
+
+function cargar(){
+  cargarPalabrasDeSheets();
+  if(BD.actual && BD.perfiles[BD.actual]){
+    E = BD.perfiles[BD.actual];
+    // migración suave por si falta algún campo
+    Object.entries(nuevoPerfil(E.nombre)).forEach(([k,v]) => { if(E[k]===undefined) E[k]=v; });
+    marcarDia();
+    document.getElementById("cardNombre").classList.add("hidden");
+    document.getElementById("saludo").textContent = "¡Hola, " + E.nombre + "! Sigamos aprendiendo 💪";
+  }
+  refrescarTodo();
+}
+function marcarDia(){
+  const d = hoy();
+  if(E.ultimoDia === d) return;
+  const ayer = new Date(Date.now()-86400000).toISOString().slice(0,10);
+  E.racha = (E.ultimoDia === ayer) ? E.racha+1 : 1;
+  E.ultimoDia = d; guardar();
+}
+function guardarNombre(){
+  const n = document.getElementById("inNombre").value.trim();
+  if(!n){ document.getElementById("inNombre").focus(); return; }
+  if(!BD.perfiles[n]) BD.perfiles[n] = nuevoPerfil(n);
+  BD.actual = n; E = BD.perfiles[n]; marcarDia(); guardar(); cargar();
+}
+function cambiarUsuario(){
+  BD.actual = null; guardar(); E = null;
+  document.getElementById("cardNombre").classList.remove("hidden");
+  document.getElementById("inNombre").value = "";
+  document.getElementById("saludo").textContent = "Aprende inglés de verdad, no lo traduzcas";
+  ir("inicio"); refrescarTodo();
+}
+function pideNombre(){
+  if(E) return false;
+  ir("inicio");
+  document.getElementById("inNombre").focus();
+  return true;
+}
+
+/* tiempo dentro de la app */
+setInterval(()=>{ if(E && !document.hidden){ E.segundos += 5; guardar(); pintarChips(); } }, 5000);
+
+/* =========================================================
+   NAVEGACIÓN
+   ========================================================= */
+function ir(p){
+  PANTALLA = p;
+  document.querySelectorAll("section").forEach(s => s.classList.add("hidden"));
+  document.getElementById("s-"+p).classList.remove("hidden");
+  document.querySelectorAll("nav.bottom button").forEach(b =>
+    b.classList.toggle("act", b.dataset.nav === p));
+  window.scrollTo({top:0, behavior:"smooth"});
+  if(p==="dic") pintarDic();
+  if(p==="progreso") pintarProgreso();
+}
+
+/* =========================================================
+   DATOS DERIVADOS
+   ========================================================= */
+const dominadas = () => E ? Object.keys(E.dominadas).length : 0;
+const minutos  = () => E ? Math.round(E.segundos/60) : 0;
+
+function pintarChips(){
+  document.getElementById("chipRacha").textContent = E ? E.racha : 0;
+  document.getElementById("chipPal").textContent   = dominadas();
+  document.getElementById("chipMin").textContent   = minutos();
+}
+function refrescarTodo(){
+  pintarChips(); pintarRetoHoy();
+  if(PANTALLA==="dic") pintarDic();
+  if(PANTALLA==="progreso") pintarProgreso();
+}
+function pintarRetoHoy(){
+  const t = document.getElementById("retoHoy");
+  if(!E){ t.textContent = "Escribe tu nombre arriba para empezar a guardar tu progreso."; return; }
+  const faltan = 200 - dominadas();
+  t.innerHTML = dominadas() === 0
+    ? "Meta de hoy: hacer tuyas tus <b>primeras 3 palabras</b>. Una palabra es tuya cuando la aciertas <b>dos veces</b> sin ver la respuesta."
+    : `Llevas <b>${dominadas()}</b> palabras tuyas y te faltan <b>${faltan}</b>. Meta de hoy: <b>+3 palabras</b> nuevas. 🔥 Racha: ${E.racha} día(s).`;
+}
+
+function acertar(w){
+  E.aciertos[w.en] = (E.aciertos[w.en]||0) + 1;
+  if(E.aciertos[w.en] >= 2 && !E.dominadas[w.en]) E.dominadas[w.en] = hoy();
+  guardar(); pintarChips();
+}
+
+/* audio */
+function decir(txt){
+  try{
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(txt);
+    u.lang = "en-US"; u.rate = .85;
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+
+/* =========================================================
+   PIENSA PRIMERO
+   ========================================================= */
+let W = null, nivelPista = 0, fallos = 0, resuelta = false;
+
+function buscarPalabra(){
+  if(pideNombre()) return;
+  const q = norm(document.getElementById("inBuscar").value);
+  const av = document.getElementById("buscarAviso");
+  if(!q){ av.innerHTML=""; return; }
+  const w = TODAS.find(x => norm(x.es) === q) || TODAS.find(x => norm(x.es).startsWith(q));
+  if(!w){
+    av.innerHTML = `<div class="aviso info">Todavía no tengo esa palabra en mi diccionario de 200.
+      Pero recuerda: antes de correr al traductor, <b>mira el contexto de la frase</b> e intenta adivinar.
+      Prueba con otra palabra o toca <b>🎲 Sorpréndeme</b>.</div>`;
+    document.getElementById("cardPensar").classList.add("hidden");
+    return;
+  }
+  av.innerHTML = ""; abrirPalabra(w);
+}
+function palabraSorpresa(){
+  if(pideNombre()) return;
+  document.getElementById("buscarAviso").innerHTML = "";
+  // prioriza las que aún no domina
+  const pend = TODAS.filter(w => !E.dominadas[w.en]);
+  const lista = pend.length ? pend : TODAS;
+  abrirPalabra(lista[Math.floor(Math.random()*lista.length)]);
+}
+function abrirPalabra(w){
+  W = w; nivelPista = 0; fallos = 0; resuelta = false;
+  document.getElementById("cardPensar").classList.remove("hidden");
+  document.getElementById("pEmoji").textContent = w.emoji;
+  document.getElementById("pEs").textContent = w.es;
+  document.getElementById("pCat").textContent = w.catNombre;
+  document.getElementById("pPistas").innerHTML = "";
+  document.getElementById("pResultado").innerHTML = "";
+  document.getElementById("pIntento").value = "";
+  document.getElementById("btnPista").disabled = false;
+  document.getElementById("btnSiguiente").classList.add("hidden");
+  darPista();
+  document.getElementById("cardPensar").scrollIntoView({behavior:"smooth", block:"start"});
+}
+function darPista(){
+  if(!W) return;
+  nivelPista++;
+  const cont = document.getElementById("pPistas");
+  let html = "";
+  if(nivelPista === 1){
+    html = `<b>Pista 1 · Tema:</b> ${W.catNombre} ${W.emoji}. Piensa si ya la escuchaste en una canción, un juego o una película.`;
+  } else if(nivelPista === 2){
+    const letras = W.en.replace("to ","");
+    html = `<b>Pista 2 · Forma:</b> empieza con «<b>${letras[0].toUpperCase()}</b>» y tiene <b>${letras.replace(/ /g,"").length}</b> letras.`;
+    E.pistasUsadas++; guardar();
+  } else if(nivelPista === 3){
+    const letras = W.en.replace("to ","");
+    const hueco = W.exEn.replace(new RegExp(letras,"i"), "______");
+    html = `<b>Pista 3 · En una frase:</b> «${hueco}»<br><span class="mini">${W.exEs}</span>`;
+    E.pistasUsadas++; guardar();
+  } else {
+    html = `<b>Última ayuda:</b> escríbela como suena y revisa. ¡Inténtalo, aunque te equivoques se aprende!`;
+    document.getElementById("btnPista").disabled = true;
+  }
+  const d = document.createElement("div");
+  d.className = "pista"; d.innerHTML = html;
+  cont.appendChild(d);
+}
+function revisarIntento(){
+  if(!W || resuelta) return;
+  const r = document.getElementById("pResultado");
+  const dado = norm(document.getElementById("pIntento").value);
+  if(!dado) return;
+  const bueno = norm(W.en);
+  const sinTo = bueno.replace(/^to /,"");
+  if(dado === bueno || dado === sinTo){
+    resuelta = true;
+    acertar(W);
+    const veces = E.aciertos[W.en];
+    r.innerHTML = `<div class="aviso ok">🎉 <b>¡Correcto!</b> ${W.es} = <b>${W.en}</b>
+      <div style="margin-top:6px">${W.exEn}<br><span class="mini">${W.exEs}</span></div>
+      <div style="margin-top:8px">${veces>=2 ? "⭐ <b>Esta palabra ya es tuya.</b> No necesitas traductor para ella." : "Aciértala una vez más y será oficialmente tuya."}</div></div>`;
+    decir(W.en.replace("to ",""));
+    document.getElementById("btnSiguiente").classList.remove("hidden");
+    E.intentosOk++; guardar(); pintarRetoHoy();
+  } else {
+    fallos++;
+    E.intentosMal++; guardar();
+    if(fallos < 2){
+      r.innerHTML = `<div class="aviso mal">Todavía no. Mira otra pista y vuelve a intentar 💪</div>`;
+      darPista();
+    } else {
+      resuelta = true;
+      E.pedidosAyuda++; guardar();
+      r.innerHTML = `<div class="aviso info">La respuesta es <b>${W.en}</b>.
+        <div style="margin-top:6px">${W.exEn}<br><span class="mini">${W.exEs}</span></div>
+        <div style="margin-top:8px">La guardé en tu diccionario. Te la voy a volver a preguntar en los retos hasta que sea tuya.</div></div>`;
+      decir(W.en.replace("to ",""));
+      document.getElementById("btnSiguiente").classList.remove("hidden");
+    }
+  }
+}
+document.getElementById("pIntento").addEventListener("keydown", e => { if(e.key==="Enter") revisarIntento(); });
+document.getElementById("inBuscar").addEventListener("keydown", e => { if(e.key==="Enter") buscarPalabra(); });
+document.getElementById("inNombre").addEventListener("keydown", e => { if(e.key==="Enter") guardarNombre(); });
+
+/* =========================================================
+   RETOS
+   ========================================================= */
+let RETO = null;
+function mezclar(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+function distractores(w, campo, n){
+  const pool = mezclar(TODAS.filter(x => x.en !== w.en && x.cat === w.cat));
+  const extra = mezclar(TODAS.filter(x => x.en !== w.en));
+  const res = [];
+  for(const c of pool.concat(extra)){ if(res.length>=n) break; if(!res.some(r=>r[campo]===c[campo])) res.push(c); }
+  return res;
+}
+
+function iniciarRetos(){
+  if(pideNombre()) return;
+  const pend = TODAS.filter(w => !E.dominadas[w.en]);
+  const base = mezclar(pend.length >= 10 ? pend : TODAS).slice(0,10);
+  RETO = { lista: base, i:0, ok:0, respondida:false };
+  document.getElementById("retoIntro").classList.add("hidden");
+  document.getElementById("retoFin").classList.add("hidden");
+  document.getElementById("retoJuego").classList.remove("hidden");
+  pintarReto();
+}
+function pintarReto(){
+  const r = RETO, w = r.lista[r.i];
+  r.respondida = false;
+  document.getElementById("retoNum").textContent = (r.i+1)+" / "+r.lista.length;
+  document.getElementById("retoPuntos").textContent = "✅ "+r.ok;
+  document.getElementById("retoBarra").style.width = (r.i/r.lista.length*100)+"%";
+  const tipo = r.i % 4;   // los cuatro tipos rotan
+  const c = document.getElementById("retoCuerpo");
+
+  if(tipo === 0){          // emoji -> inglés
+    const ops = mezclar([w].concat(distractores(w,"en",3)));
+    c.innerHTML = `<div class="emojigrande">${w.emoji}</div>
+      <div class="palabra-es">${w.es}</div>
+      <p class="lead centro">¿Cómo se dice en inglés?</p>
+      <div class="ops">${ops.map(o=>`<button class="op" data-v="${o.en}">${o.en}</button>`).join("")}</div>`;
+    ligarOps(w.en, w);
+  } else if(tipo === 1){   // inglés -> español
+    const ops = mezclar([w].concat(distractores(w,"es",3)));
+    c.innerHTML = `<div class="emojigrande">🔤</div>
+      <div class="palabra-es">${w.en}</div>
+      <p class="lead centro">¿Qué significa en español?</p>
+      <div class="ops">${ops.map(o=>`<button class="op" data-v="${o.es}">${o.es}</button>`).join("")}</div>`;
+    ligarOps(w.es, w);
+  } else if(tipo === 2){   // escucha y escribe
+    c.innerHTML = `<div class="centro"><button class="btn btn-s" onclick="decir('${w.en.replace("to ","")}')" style="font-size:1.6rem;padding:18px 26px">🔊 Escuchar</button></div>
+      <p class="lead centro" style="margin-top:12px">Escucha y escribe la palabra en inglés. (Pista: significa «<b>${w.es}</b>»)</p>
+      <input type="text" id="retoInput" placeholder="Escribe aquí…" autocomplete="off">
+      <button class="btn btn-g btn-full" style="margin-top:10px" onclick="revisarEscrito('${w.en.replace(/'/g,"")}')">Revisar</button>
+      <div id="retoFb"></div>`;
+    setTimeout(()=>decir(w.en.replace("to ","")), 350);
+    ligarEnter(w);
+  } else {                 // completa la frase
+    const letras = w.en.replace("to ","");
+    const hueco = w.exEn.replace(new RegExp(letras,"i"), "______");
+    c.innerHTML = `<div class="emojigrande">${w.emoji}</div>
+      <p class="lead centro">Completa la frase en inglés:</p>
+      <div class="palabra-es" style="font-size:1.15rem;line-height:1.5">${hueco}</div>
+      <p class="mini centro">${w.exEs}</p>
+      <input type="text" id="retoInput" placeholder="La palabra que falta…" autocomplete="off" style="margin-top:12px">
+      <button class="btn btn-g btn-full" style="margin-top:10px" onclick="revisarEscrito('${letras.replace(/'/g,"")}')">Revisar</button>
+      <div id="retoFb"></div>`;
+    ligarEnter(w);
+  }
+  RETO.actual = w;
+}
+function ligarOps(correcta, w){
+  document.querySelectorAll("#retoCuerpo .op").forEach(b => b.onclick = () => {
+    if(RETO.respondida) return; RETO.respondida = true;
+    const bien = b.dataset.v === correcta;
+    document.querySelectorAll("#retoCuerpo .op").forEach(x => {
+      const cl = x.dataset.v === correcta ? "buena" : (x===b ? "mala" : null);
+      if(cl) x.classList.add(cl);
+    });
+    if(bien){ RETO.ok++; E.retosOk++; acertar(w); decir(w.en.replace("to ","")); }
+    else { E.retosMal++; }
+    guardar();
+    setTimeout(avanzarReto, bien ? 700 : 1500);
+  });
+}
+function ligarEnter(w){
+  const inp = document.getElementById("retoInput");
+  if(inp){ inp.focus(); inp.addEventListener("keydown", e => {
+    if(e.key==="Enter") revisarEscrito(w.en.replace("to ","")); }); }
+}
+function revisarEscrito(correcta){
+  if(RETO.respondida) return;
+  const inp = document.getElementById("retoInput");
+  const fb = document.getElementById("retoFb");
+  if(!inp.value.trim()) return;
+  RETO.respondida = true;
+  const w = RETO.actual;
+  const bien = norm(inp.value) === norm(correcta);
+  if(bien){ RETO.ok++; E.retosOk++; acertar(w); fb.innerHTML = `<div class="aviso ok">🎉 ¡Muy bien! <b>${correcta}</b></div>`; }
+  else { E.retosMal++; fb.innerHTML = `<div class="aviso mal">Casi. La respuesta era <b>${correcta}</b>.<br><span class="mini">${w.exEn} — ${w.exEs}</span></div>`; }
+  guardar(); decir(correcta);
+  setTimeout(avanzarReto, bien ? 900 : 2200);
+}
+function avanzarReto(){
+  RETO.i++;
+  if(RETO.i < RETO.lista.length){ pintarReto(); return; }
+  document.getElementById("retoJuego").classList.add("hidden");
+  const fin = document.getElementById("retoFin");
+  const p = RETO.ok, total = RETO.lista.length;
+  const msg = p>=9 ? "¡Increíble! Casi no necesitaste ayuda 🌟"
+            : p>=7 ? "¡Muy bien! Vas por buen camino 💪"
+            : p>=5 ? "Buen intento. Repite el reto y verás la diferencia."
+            : "Tranquila, equivocarse es parte de aprender. Repite el reto 🙂";
+  fin.innerHTML = `<div class="centro"><div class="emojigrande">${p>=7?"🏆":"🌱"}</div>
+    <h2>${p} de ${total} correctas</h2><p class="lead">${msg}</p></div>
+    <button class="btn btn-p btn-full" onclick="iniciarRetos()">Otro reto</button>
+    <button class="btn btn-s btn-full" style="margin-top:8px" onclick="ir('progreso')">Ver mi progreso</button>`;
+  fin.classList.remove("hidden");
+  document.getElementById("retoIntro").classList.remove("hidden");
+  pintarRetoHoy();
+}
+
+/* =========================================================
+   CAZADOR DE ERRORES
+   ========================================================= */
+let CAZ = null;
+function iniciarErrores(){
+  if(pideNombre()) return;
+  CAZ = { lista: mezclar(ERRORES).slice(0,8), i:0, ok:0, respondida:false };
+  document.getElementById("errIntro").classList.add("hidden");
+  document.getElementById("errFin").classList.add("hidden");
+  document.getElementById("errJuego").classList.remove("hidden");
+  pintarError();
+}
+function pintarError(){
+  const c = CAZ, q = c.lista[c.i];
+  c.respondida = false;
+  document.getElementById("errNum").textContent = (c.i+1)+" / "+c.lista.length;
+  document.getElementById("errPuntos").textContent = "🕵️ "+c.ok;
+  document.getElementById("errBarra").style.width = (c.i/c.lista.length*100)+"%";
+  const orden = mezclar(q.opciones.map((t,idx)=>({t, bien: idx===q.correcta})));
+  document.getElementById("errCuerpo").innerHTML = `
+    <p class="mini">Frase original en español</p>
+    <div class="palabra-es" style="font-size:1.2rem">«${q.es}»</div>
+    <div class="aviso mal" style="margin-top:12px">🤖 El traductor automático dijo:<br><b>“${q.mala}”</b></div>
+    <p class="lead" style="margin-top:14px">¿Cuál es la traducción <b>correcta</b>?</p>
+    <div class="ops">${orden.map((o,i)=>`<button class="op" data-i="${i}">${o.t}</button>`).join("")}</div>
+    <div id="errFb"></div>`;
+  document.querySelectorAll("#errCuerpo .op").forEach(b => b.onclick = () => {
+    if(c.respondida) return; c.respondida = true;
+    const el = orden[+b.dataset.i];
+    document.querySelectorAll("#errCuerpo .op").forEach((x,i) => {
+      const cl = orden[i].bien ? "buena" : (x===b ? "mala" : null);
+      if(cl) x.classList.add(cl);
+    });
+    if(el.bien){ c.ok++; E.errOk++; } else { E.errMal++; }
+    guardar();
+    document.getElementById("errFb").innerHTML =
+      `<div class="aviso ${el.bien?"ok":"info"}" style="margin-top:14px">
+        ${el.bien ? "🎉 <b>¡Bien cazado!</b><br>" : "🔎 <b>Mira por qué:</b><br>"}${q.porque}</div>
+       <button class="btn btn-p btn-full" style="margin-top:12px" onclick="avanzarError()">Siguiente ➜</button>`;
+  });
+}
+function avanzarError(){
+  CAZ.i++;
+  if(CAZ.i < CAZ.lista.length){ pintarError(); return; }
+  document.getElementById("errJuego").classList.add("hidden");
+  const fin = document.getElementById("errFin");
+  fin.innerHTML = `<div class="centro"><div class="emojigrande">${CAZ.ok>=6?"🥇":"🔍"}</div>
+    <h2>Cazaste ${CAZ.ok} de ${CAZ.lista.length}</h2>
+    <p class="lead">Recuerda: el traductor traduce <b>palabras</b>, no <b>ideas</b>. Por eso hay que entender lo que uno escribe.</p></div>
+    <button class="btn btn-p btn-full" onclick="iniciarErrores()">Otra misión</button>`;
+  fin.classList.remove("hidden");
+  document.getElementById("errIntro").classList.remove("hidden");
+}
+
+/* =========================================================
+   DICCIONARIO
+   ========================================================= */
+let catFiltro = "todas";
+function pintarFiltros(){
+  const c = document.getElementById("filtrosCat");
+  c.innerHTML = `<button class="${catFiltro==="todas"?"act":""}" onclick="setCat('todas')">Todas (200)</button>` +
+    CATEGORIAS.map(k=>`<button class="${catFiltro===k.id?"act":""}" onclick="setCat('${k.id}')">${k.emoji} ${k.nombre}</button>`).join("");
+}
+function setCat(id){ catFiltro = id; pintarDic(); }
+function pintarDic(){
+  pintarFiltros();
+  const q = norm(document.getElementById("inFiltro").value);
+  const lista = TODAS.filter(w =>
+    (catFiltro==="todas" || w.cat===catFiltro) &&
+    (!q || norm(w.es).includes(q) || norm(w.en).includes(q)));
+  document.getElementById("wlist").innerHTML = lista.map(w => {
+    const dom = E && E.dominadas[w.en];
+    return `<div class="w ${dom?"dom":""}">
+      <span class="e">${w.emoji}</span>
+      <span class="txt"><b>${w.es} → ${w.en}</b><span>${w.exEn} · ${w.exEs}</span></span>
+      ${dom?'<span title="ya es tuya">⭐</span>':''}
+      <button class="snd" onclick="decir('${w.en.replace("to ","").replace(/'/g,"")}')">🔊</button>
+    </div>`;
+  }).join("") || `<p class="lead">No encontré esa palabra.</p>`;
+}
+
+/* =========================================================
+   PROGRESO Y MEDALLAS
+   ========================================================= */
+const MEDALLAS = [
+  {e:"🌱", n:"Primeras 5 palabras",   ok:E=>dominadas()>=5},
+  {e:"📗", n:"25 palabras mías",       ok:E=>dominadas()>=25},
+  {e:"📘", n:"50 palabras mías",       ok:E=>dominadas()>=50},
+  {e:"🎓", n:"100 palabras mías",      ok:E=>dominadas()>=100},
+  {e:"👑", n:"¡Las 200!",              ok:E=>dominadas()>=200},
+  {e:"🔥", n:"3 días seguidos",        ok:E=>E.racha>=3},
+  {e:"⚡", n:"7 días seguidos",        ok:E=>E.racha>=7},
+  {e:"🕵️", n:"20 errores cazados",    ok:E=>E.errOk>=20},
+  {e:"🧠", n:"50 retos correctos",     ok:E=>E.retosOk>=50},
+  {e:"💪", n:"10 aciertos sin pistas", ok:E=>E.intentosOk>=10},
+  {e:"⏱️", n:"60 minutos jugando",     ok:E=>minutos()>=60},
+  {e:"🌍", n:"Todos los temas tocados",ok:E=>CATEGORIAS.every(c=>c.palabras.some(p=>E.dominadas[p[1]]))}
+];
+function pintarProgreso(){
+  if(!E){ ir("inicio"); return; }
+  document.getElementById("kPal").textContent   = dominadas();
+  document.getElementById("kRacha").textContent = E.racha;
+  document.getElementById("kMin").textContent   = minutos();
+  document.getElementById("kAyuda").textContent = E.pedidosAyuda;
+  document.getElementById("barrasCat").innerHTML = CATEGORIAS.map(c => {
+    const n = c.palabras.filter(p => E.dominadas[p[1]]).length;
+    const pct = Math.round(n/c.palabras.length*100);
+    return `<div class="rowcat"><div class="t"><span>${c.emoji} ${c.nombre}</span><span>${n}/${c.palabras.length}</span></div>
+      <div class="barra"><i style="width:${pct}%;background:${c.color}"></i></div></div>`;
+  }).join("");
+  document.getElementById("medallas").innerHTML = MEDALLAS.map(m =>
+    `<div class="med ${m.ok(E)?"":"off"}"><div class="e">${m.e}</div><div class="n">${m.n}</div></div>`).join("");
+}
+
+/* =========================================================
+   MODO PROFESORA
+   ========================================================= */
+function entrarProfe(){
+  if(document.getElementById("inPin").value.trim() !== PIN_PROFE){
+    alert("Clave incorrecta."); return;
+  }
+  document.getElementById("profeLogin").classList.add("hidden");
+  document.getElementById("profePanel").classList.remove("hidden");
+  pintarProfe();
+}
+function filasProfe(){
+  return Object.values(BD.perfiles).map(p => {
+    const dom = Object.keys(p.dominadas||{}).length;
+    const totalR = (p.retosOk||0)+(p.retosMal||0);
+    const pct = totalR ? Math.round((p.retosOk||0)/totalR*100) : 0;
+    return { nombre:p.nombre, dom, min:Math.round((p.segundos||0)/60), racha:p.racha||0,
+             pct, ayuda:p.pedidosAyuda||0, err:(p.errOk||0), pistas:(p.pistasUsadas||0) };
+  }).sort((a,b)=>b.dom-a.dom);
+}
+function pintarProfe(){
+  const f = filasProfe();
+  const prom = f.length ? Math.round(f.reduce((s,x)=>s+x.dom,0)/f.length) : 0;
+  const promAyuda = f.length ? (f.reduce((s,x)=>s+x.ayuda,0)/f.length).toFixed(1) : 0;
+  document.getElementById("profeResumen").innerHTML =
+    `<b>${f.length}</b> alumna(s) registrada(s) en esta computadora. Promedio de palabras dominadas: <b>${prom}</b> de 200.
+     Promedio de veces que pidieron la respuesta (dependencia del traductor): <b>${promAyuda}</b>.`;
+  document.getElementById("tablaProfe").innerHTML =
+    `<tr><th>Alumna</th><th>Palabras<br>dominadas</th><th>% aciertos<br>en retos</th><th>Pidió la<br>respuesta</th><th>Pistas<br>usadas</th><th>Errores<br>cazados</th><th>Min</th><th>Racha</th></tr>` +
+    (f.length ? f.map(x=>`<tr><td><b>${x.nombre}</b></td><td>${x.dom}</td><td>${x.pct}%</td><td>${x.ayuda}</td><td>${x.pistas}</td><td>${x.err}</td><td>${x.min}</td><td>${x.racha}</td></tr>`).join("")
+              : `<tr><td colspan="8">Todavía no hay alumnas registradas.</td></tr>`);
+}
+function exportarCSV(){
+  const f = filasProfe();
+  const filas = [["Alumna","Palabras dominadas","% aciertos retos","Veces que pidio la respuesta","Pistas usadas","Errores cazados","Minutos","Racha"]]
+    .concat(f.map(x=>[x.nombre,x.dom,x.pct,x.ayuda,x.pistas,x.err,x.min,x.racha]));
+  const csv = filas.map(r=>r.join(";")).join(String.fromCharCode(10));
+  // 1) intenta descargar el archivo (funciona al abrir la app desde la carpeta)
+  let descargo = false;
+  try{
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob(["﻿"+csv], {type:"text/csv;charset=utf-8"}));
+    a.download = "resultados_cruzando_fronteras.csv";
+    document.body.appendChild(a); a.click(); a.remove(); descargo = true;
+  }catch(e){}
+  // 2) y siempre deja el texto listo para copiar y pegar en Excel
+  let caja = document.getElementById("cajaCSV");
+  if(!caja){
+    caja = document.createElement("div"); caja.id = "cajaCSV";
+    document.getElementById("profePanel").appendChild(caja);
+  }
+  caja.innerHTML = `<p class="mini" style="margin-top:14px">${descargo ? "Si no encuentras el archivo descargado, copia" : "Copia"} este texto y pégalo en Excel (menú <b>Datos → Texto en columnas → separado por punto y coma</b>):</p>
+    <textarea readonly rows="7" style="width:100%;font-family:'JetBrains Mono',monospace;font-size:.78rem;padding:10px;border-radius:10px;border:1.5px solid var(--linea);background:var(--papel);color:var(--tinta)">${csv}</textarea>`;
+  const ta = caja.querySelector("textarea"); ta.focus(); ta.select();
+}
+
+/* arranque */
+cargar();
+pintarFiltros();
+</script>
+</body>
+</html>
