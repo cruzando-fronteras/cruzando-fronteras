@@ -348,18 +348,17 @@ async function cargarPalabrasDeSheets() {
   try {
     const res = await fetch(SHEETS_CSV);
     const csv = await res.text();
-    const lineas = csv.split("
-").slice(1).filter(l => l.trim());
-    
+    const lineas = csv.split("\n").slice(1).filter(l => l.trim());
+
     lineas.forEach(linea => {
-      const p = linea.split("	");
+      const p = linea.split("\t");
       if (p.length >= 6) {
-        TODAS.push({es: p[1].trim(), en: p[2].trim(), emoji: p[3].trim(), 
-                   exEn: p[4].trim(), exEs: p[5].trim(), cat: p[0].toLowerCase().replace(/s+/g,'-'), catNombre: p[0].trim(), color: '#7c3aed'});
+        TODAS.push({es: p[1].trim(), en: p[2].trim(), emoji: p[3].trim(),
+                   exEn: p[4].trim(), exEs: p[5].trim(), cat: p[0].toLowerCase().replace(/\s+/g,'-'), catNombre: p[0].trim(), color: '#7c3aed'});
       }
     });
     console.log("Cargadas " + TODAS.length + " palabras desde Sheets");
-  } catch (e) { console.log("Sheets offline"); }
+  } catch (e) { console.log("Sheets offline: " + e.message); }
 }
 
 CATEGORIAS.forEach(c => c.palabras.forEach(p => TODAS.push({
