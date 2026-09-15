@@ -312,6 +312,16 @@ nav.bottom button.act{color:var(--morado);background:#f5f1fe}
     <h2>Resultados del salón</h2>
     <p class="lead" id="profeResumen"></p>
     <div class="scrollx"><table id="tablaProfe"></table></div>
+    <button class="btn btn-p btn-full" style="margin-top:14px" onclick="toggleAgregarPalabra()">➕ Agregar palabra nueva</button>
+    <div id="formAgregarPalabra" class="hidden" style="margin-top:14px;background:#f8f5ff;padding:14px;border-radius:12px">
+      <input type="text" id="npEspanol" placeholder="Palabra en español" style="margin-bottom:8px">
+      <input type="text" id="npIngles" placeholder="Palabra en inglés" style="margin-bottom:8px">
+      <input type="text" id="npEmoji" placeholder="Emoji" style="margin-bottom:8px">
+      <input type="text" id="npTema" placeholder="Tema (ej: Animales)" style="margin-bottom:8px">
+      <input type="text" id="npEjemploEn" placeholder="Ejemplo en inglés" style="margin-bottom:8px">
+      <input type="text" id="npEjemploEs" placeholder="Ejemplo en español" style="margin-bottom:8px">
+      <button class="btn btn-p btn-full" onclick="guardarPalabraNueva()">Guardar palabra</button>
+    </div>
     <button class="btn btn-s btn-full" style="margin-top:14px" onclick="exportarCSV()">⬇️ Descargar resultados (CSV para Excel)</button>
   </div>
 </section>
@@ -866,6 +876,29 @@ function exportarCSV(){
   caja.innerHTML = `<p class="mini" style="margin-top:14px">${descargo ? "Si no encuentras el archivo descargado, copia" : "Copia"} este texto y pégalo en Excel (menú <b>Datos → Texto en columnas → separado por punto y coma</b>):</p>
     <textarea readonly rows="7" style="width:100%;font-family:'JetBrains Mono',monospace;font-size:.78rem;padding:10px;border-radius:10px;border:1.5px solid var(--linea);background:var(--papel);color:var(--tinta)">${csv}</textarea>`;
   const ta = caja.querySelector("textarea"); ta.focus(); ta.select();
+}
+function toggleAgregarPalabra(){
+  const f = document.getElementById("formAgregarPalabra");
+  f.classList.toggle("hidden");
+}
+function guardarPalabraNueva(){
+  const es = document.getElementById("npEspanol").value.trim();
+  const en = document.getElementById("npIngles").value.trim();
+  const emoji = document.getElementById("npEmoji").value.trim();
+  const tema = document.getElementById("npTema").value.trim();
+  const ejEn = document.getElementById("npEjemploEn").value.trim();
+  const ejEs = document.getElementById("npEjemploEs").value.trim();
+  if(!es||!en||!emoji||!tema){alert("Completa todos los campos");return;}
+  TODAS.push({es,en,emoji,exEn:ejEn,exEs:ejEs,cat:tema.toLowerCase(),catNombre:tema,color:"#ec4899"});
+  alert("Palabra agregada. Total: "+TODAS.length);
+  document.getElementById("npEspanol").value="";
+  document.getElementById("npIngles").value="";
+  document.getElementById("npEmoji").value="";
+  document.getElementById("npTema").value="";
+  document.getElementById("npEjemploEn").value="";
+  document.getElementById("npEjemploEs").value="";
+  document.getElementById("totalPal").textContent=TODAS.length;
+  document.getElementById("dicPal").textContent=TODAS.length;
 }
 
 /* arranque */
