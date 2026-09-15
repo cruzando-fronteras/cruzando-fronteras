@@ -164,7 +164,7 @@ nav.bottom button.act{color:var(--morado);background:#f5f1fe}
     </div></div>
     <div class="fila-chips">
       <div class="chip">🔥 <span id="chipRacha">0</span> días</div>
-      <div class="chip">🧠 <span id="chipPal">0</span>/200 palabras mías</div>
+      <div class="chip">🧠 <span id="chipPal">0</span>/<span id="totalPal">200</span> palabras mías</div>
       <div class="chip">⏱️ <span id="chipMin">0</span> min</div>
     </div>
   </div>
@@ -191,7 +191,7 @@ nav.bottom button.act{color:var(--morado);background:#f5f1fe}
     <button class="tile" onclick="ir('pensar')"><span class="ic">🤔</span><b>Piensa Primero</b><span class="d">El traductor que te hace intentarlo antes</span></button>
     <button class="tile" onclick="ir('retos')"><span class="ic">🎯</span><b>Retos</b><span class="d">Imágenes, audio y frases</span></button>
     <button class="tile" onclick="ir('errores')"><span class="ic">🕵️</span><b>Cazador de Errores</b><span class="d">Corrige al traductor automático</span></button>
-    <button class="tile" onclick="ir('dic')"><span class="ic">📒</span><b>Mi diccionario</b><span class="d">Mis 200 palabras con audio</span></button>
+    <button class="tile" onclick="ir('dic')"><span class="ic">📒</span><b>Mi diccionario</b><span class="d">Mis <span id="dicPal">200</span> palabras con audio</span></button>
     <button class="tile" onclick="ir('progreso')"><span class="ic">🏅</span><b>Mi progreso</b><span class="d">Medallas y estadísticas</span></button>
     <button class="tile" onclick="ir('profe')"><span class="ic">👩‍🏫</span><b>Modo profesora</b><span class="d">Resultados del salón</span></button>
   </div>
@@ -386,6 +386,8 @@ function cargar(){
     document.getElementById("cardNombre").classList.add("hidden");
     document.getElementById("saludo").textContent = "¡Hola, " + E.nombre + "! Sigamos aprendiendo 💪";
   }
+  document.getElementById("totalPal").textContent = TODAS.length;
+  document.getElementById("dicPal").textContent = TODAS.length;
   refrescarTodo();
 }
 function marcarDia(){
