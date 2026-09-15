@@ -756,7 +756,7 @@ function avanzarError(){
 let catFiltro = "todas";
 function pintarFiltros(){
   const c = document.getElementById("filtrosCat");
-  c.innerHTML = `<button class="${catFiltro==="todas"?"act":""}" onclick="setCat('todas')">Todas (200)</button>` +
+  c.innerHTML = `<button class="${catFiltro==="todas"?"act":""}" onclick="setCat('todas')">Todas (${TODAS.length})</button>` +
     CATEGORIAS.map(k=>`<button class="${catFiltro===k.id?"act":""}" onclick="setCat('${k.id}')">${k.emoji} ${k.nombre}</button>`).join("");
 }
 function setCat(id){ catFiltro = id; pintarDic(); }
