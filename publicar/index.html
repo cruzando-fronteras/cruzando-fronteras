@@ -1,0 +1,1227 @@
+<title>Cruzando Fronteras</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+:root{
+  --papel:#fdfcf8; --papel2:#ffffff; --tinta:#182031; --suave:#6d7689;
+  --linea:#e3e0d6; --rojo:#cf3b3b; --azul:#1c4f9c; --verde:#0f8a6b;
+  --ambar:#c9821f; --sello:rgba(28,79,156,.12);
+  --sombra:0 10px 26px rgba(24,32,49,.07);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --papel:#12161f; --papel2:#1a202c; --tinta:#eef1f6; --suave:#9aa4b6;
+    --linea:#2b3444; --rojo:#f4746f; --azul:#7aa6ee; --verde:#4cc79f;
+    --ambar:#e7ab53; --sello:rgba(122,166,238,.16);
+    --sombra:0 10px 26px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --papel:#12161f; --papel2:#1a202c; --tinta:#eef1f6; --suave:#9aa4b6;
+  --linea:#2b3444; --rojo:#f4746f; --azul:#7aa6ee; --verde:#4cc79f;
+  --ambar:#e7ab53; --sello:rgba(122,166,238,.16);
+  --sombra:0 10px 26px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{
+  margin:0; background:var(--papel); color:var(--tinta);
+  font-family:"Nunito Sans",system-ui,-apple-system,sans-serif;
+  font-size:16px; line-height:1.55; padding-bottom:92px;
+}
+h1,h2,h3{font-family:"Baloo 2","Nunito Sans",system-ui,sans-serif;font-weight:700;text-wrap:balance;line-height:1.2}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+.wrap{max-width:780px;margin:0 auto;padding:16px}
+
+.airmail{height:9px;background:repeating-linear-gradient(-45deg,
+  var(--rojo) 0 13px, transparent 13px 26px, var(--azul) 26px 39px, transparent 39px 52px)}
+
+header.top{background:var(--papel2)}
+header.top .wrap{padding:16px}
+.marca{display:flex;align-items:center;gap:12px}
+.marca .globo{font-size:2rem;line-height:1}
+.marca h1{margin:0;font-size:1.35rem;letter-spacing:-.01em}
+.marca .sub{color:var(--suave);font-size:.82rem;margin-top:1px}
+.chips{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.chip{
+  font-family:"JetBrains Mono",monospace;font-size:.72rem;font-weight:700;
+  border:1.5px solid var(--linea);border-radius:6px;padding:5px 9px;color:var(--suave);
+  display:flex;align-items:center;gap:6px;background:var(--papel);font-variant-numeric:tabular-nums
+}
+.chip b{color:var(--tinta)}
+
+.card{
+  background:var(--papel2);border:1px solid var(--linea);border-radius:14px;
+  padding:20px;box-shadow:var(--sombra);margin-top:16px
+}
+.card h2{margin:0 0 6px;font-size:1.2rem}
+.lead{color:var(--suave);font-size:.9rem;margin:0 0 16px}
+.eyebrow{
+  font-family:"JetBrains Mono",monospace;font-size:.68rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.14em;color:var(--suave);margin-bottom:6px
+}
+
+.btn{
+  border:1.5px solid transparent;border-radius:10px;padding:13px 18px;font-size:.95rem;
+  font-weight:700;font-family:"Baloo 2",sans-serif;cursor:pointer;transition:transform .08s
+}
+.btn:active{transform:translateY(1px)}
+.btn:focus-visible{outline:3px solid var(--ambar);outline-offset:2px}
+.btn-p{background:var(--azul);color:#fff}
+.btn-s{background:transparent;color:var(--azul);border-color:var(--linea)}
+.btn-g{background:var(--verde);color:#fff}
+.btn-full{width:100%}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+input[type=text]{
+  width:100%;padding:13px 15px;border-radius:10px;border:1.5px solid var(--linea);
+  font-size:1.05rem;font-family:inherit;background:var(--papel);color:var(--tinta);outline:none
+}
+input[type=text]:focus{border-color:var(--azul)}
+
+.menu{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:16px}
+@media(min-width:640px){.menu{grid-template-columns:repeat(3,1fr)}}
+.tile{
+  background:var(--papel2);border:1px solid var(--linea);border-radius:14px;padding:16px 14px;
+  text-align:left;cursor:pointer;box-shadow:var(--sombra);font-family:inherit;color:var(--tinta);
+  border-top:4px solid var(--azul)
+}
+.tile:nth-child(2){border-top-color:var(--verde)}
+.tile:nth-child(3){border-top-color:var(--rojo)}
+.tile:nth-child(4){border-top-color:var(--ambar)}
+.tile:nth-child(6){border-top-color:var(--suave)}
+.tile:active{transform:translateY(1px)}
+.tile:focus-visible{outline:3px solid var(--ambar);outline-offset:2px}
+.tile .ic{font-size:1.7rem;display:block;margin-bottom:6px}
+.tile b{display:block;font-size:.98rem;font-family:"Baloo 2",sans-serif}
+.tile .d{color:var(--suave);font-size:.76rem;line-height:1.35;display:block;margin-top:2px}
+
+.pista{
+  background:var(--papel);border:1.5px dashed var(--azul);border-radius:10px;
+  padding:12px 14px;margin-top:10px;font-size:.92rem
+}
+.emojigrande{font-size:3.6rem;text-align:center;margin:4px 0 2px}
+.palabra-es{text-align:center;font-size:1.6rem;font-family:"Baloo 2",sans-serif;font-weight:700;margin:0}
+.cat-tag{text-align:center;color:var(--suave);font-size:.72rem;margin-bottom:14px;
+  font-family:"JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.1em}
+.aviso{border-radius:10px;padding:13px 15px;margin-top:12px;font-size:.92rem;border:1.5px solid;color:var(--tinta)}
+.ok{background:color-mix(in srgb,var(--verde) 12%,transparent);border-color:var(--verde)}
+.mal{background:color-mix(in srgb,var(--rojo) 12%,transparent);border-color:var(--rojo)}
+.info{background:color-mix(in srgb,var(--azul) 12%,transparent);border-color:var(--azul)}
+
+.ops{display:grid;gap:10px;margin-top:16px}
+.op{
+  text-align:left;background:var(--papel);border:1.5px solid var(--linea);border-radius:10px;
+  padding:14px 16px;font-size:1rem;font-weight:600;cursor:pointer;font-family:inherit;color:var(--tinta)
+}
+.op:hover{border-color:var(--azul)}
+.op:focus-visible{outline:3px solid var(--ambar);outline-offset:2px}
+.op.buena{border-color:var(--verde);background:color-mix(in srgb,var(--verde) 14%,transparent)}
+.op.mala{border-color:var(--rojo);background:color-mix(in srgb,var(--rojo) 14%,transparent)}
+
+.barra{height:10px;border-radius:99px;background:var(--linea);overflow:hidden;margin-top:6px}
+.barra > i{display:block;height:100%;border-radius:99px;transition:width .45s}
+.rowcat{margin-bottom:14px}
+.rowcat .t{display:flex;justify-content:space-between;font-size:.86rem;font-weight:600}
+.rowcat .t span:last-child{font-family:"JetBrains Mono",monospace;font-variant-numeric:tabular-nums;color:var(--suave)}
+
+.medallas{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:12px;margin-top:12px}
+.med{
+  text-align:center;border:2.5px dashed var(--azul);border-radius:50%;aspect-ratio:1;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px;
+  color:var(--azul);background:var(--sello)
+}
+.med:nth-child(3n){transform:rotate(-7deg)}
+.med:nth-child(3n+1){transform:rotate(5deg)}
+.med.off{border-color:var(--linea);color:var(--suave);background:transparent;opacity:.5;transform:none;border-style:solid}
+.med .e{font-size:1.6rem;line-height:1}
+.med .n{font-size:.6rem;font-weight:700;margin-top:4px;line-height:1.15;
+  font-family:"JetBrains Mono",monospace;text-transform:uppercase}
+
+.filtros{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:10px}
+.filtros button{
+  white-space:nowrap;border:1.5px solid var(--linea);background:var(--papel);border-radius:8px;
+  padding:8px 13px;font-size:.8rem;font-weight:700;cursor:pointer;font-family:inherit;color:var(--suave)
+}
+.filtros button.act{background:var(--azul);color:#fff;border-color:var(--azul)}
+.wlist{display:grid;gap:8px;max-height:58vh;overflow-y:auto;padding-right:2px}
+.w{display:flex;align-items:center;gap:11px;border:1px solid var(--linea);border-radius:10px;padding:10px 12px;background:var(--papel)}
+.w .e{font-size:1.4rem}
+.w .txt{flex:1;min-width:0}
+.w .txt b{display:block;font-size:.95rem}
+.w .txt span{color:var(--suave);font-size:.8rem;display:block}
+.w .snd{border:1.5px solid var(--linea);background:transparent;border-radius:8px;padding:7px 9px;cursor:pointer;font-size:.95rem;color:var(--tinta)}
+.w.dom{border-color:var(--verde);border-left-width:4px}
+
+table{width:100%;border-collapse:collapse;font-size:.84rem;margin-top:10px}
+th,td{padding:9px 8px;text-align:left;border-bottom:1px solid var(--linea)}
+td{font-variant-numeric:tabular-nums}
+th{color:var(--suave);font-size:.66rem;text-transform:uppercase;letter-spacing:.08em;
+  font-family:"JetBrains Mono",monospace;font-weight:700}
+.scrollx{overflow-x:auto}
+
+nav.bottom{
+  position:fixed;left:0;right:0;bottom:0;background:var(--papel2);border-top:1px solid var(--linea);
+  display:flex;justify-content:space-around;padding:8px 4px calc(8px + env(safe-area-inset-bottom));z-index:20
+}
+nav.bottom button{
+  border:0;background:none;font-family:"JetBrains Mono",monospace;color:var(--suave);
+  font-size:.6rem;font-weight:700;text-transform:uppercase;
+  display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:5px 8px;border-radius:8px
+}
+nav.bottom button .i{font-size:1.2rem}
+nav.bottom button.act{color:var(--azul);background:var(--sello)}
+
+.hidden{display:none !important}
+.centro{text-align:center}
+.mini{font-size:.76rem;color:var(--suave)}
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.kpi{background:var(--papel);border:1px solid var(--linea);border-radius:10px;padding:14px 10px;text-align:center}
+.kpi b{display:block;font-size:1.9rem;font-family:"Baloo 2",sans-serif;color:var(--azul);font-variant-numeric:tabular-nums;line-height:1.1}
+.kpi span{font-size:.7rem;color:var(--suave);display:block;margin-top:3px}
+@media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
+</style>
+
+<div class="airmail"></div>
+<header class="top">
+  <div class="wrap">
+    <div class="marca"><span class="globo">🛂</span><div>
+      <h1>Cruzando Fronteras</h1>
+      <div class="sub" id="saludo">Tu pasaporte de palabras en inglés</div>
+    </div></div>
+    <div class="chips">
+      <div class="chip">🔥 racha <b id="chipRacha">0</b></div>
+      <div class="chip">🛃 visados <b id="chipPal">0</b>/200</div>
+      <div class="chip">⏱ <b id="chipMin">0</b> min</div>
+    </div>
+  </div>
+</header>
+<div class="airmail"></div>
+
+<div class="wrap">
+
+<section id="s-inicio">
+  <div class="card" id="cardNombre">
+    <div class="eyebrow">Control de pasaportes</div>
+    <h2>¿Cómo te llamas?</h2>
+    <p class="lead">Escribe tu nombre para abrir tu pasaporte. Tu progreso se guarda en este teléfono o computadora.</p>
+    <input type="text" id="inNombre" placeholder="Tu nombre" autocomplete="off">
+    <button class="btn btn-p btn-full" style="margin-top:10px" onclick="guardarNombre()">Abrir mi pasaporte</button>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Misión de hoy</div>
+    <p class="lead" id="retoHoy" style="margin-bottom:16px">Cargando…</p>
+    <button class="btn btn-p btn-full" onclick="ir('pensar')">Practicar ahora</button>
+  </div>
+
+  <div class="menu">
+    <button class="tile" onclick="ir('pensar')"><span class="ic">🤔</span><b>Piensa Primero</b><span class="d">El traductor que te hace intentarlo antes</span></button>
+    <button class="tile" onclick="ir('retos')"><span class="ic">🎯</span><b>Retos</b><span class="d">Imágenes, audio y frases</span></button>
+    <button class="tile" onclick="ir('errores')"><span class="ic">🕵️</span><b>Cazador de Errores</b><span class="d">Corrige al traductor automático</span></button>
+    <button class="tile" onclick="ir('dic')"><span class="ic">📒</span><b>Mi diccionario</b><span class="d">Las 200 palabras con audio</span></button>
+    <button class="tile" onclick="ir('progreso')"><span class="ic">🛃</span><b>Mis sellos</b><span class="d">Progreso y medallas</span></button>
+    <button class="tile" onclick="ir('profe')"><span class="ic">👩‍🏫</span><b>Modo profesora</b><span class="d">Resultados del salón</span></button>
+  </div>
+</section>
+
+<section id="s-pensar" class="hidden">
+  <div class="card">
+    <div class="eyebrow">Aduana de palabras</div>
+    <h2>🤔 Piensa Primero</h2>
+    <p class="lead">Escribe una palabra en español. <b>No te la traduzco de una:</b> primero te doy pistas y tú intentas. Así sí se aprende.</p>
+    <input type="text" id="inBuscar" placeholder="Ejemplo: mariposa" autocomplete="off">
+    <div class="grid2" style="margin-top:10px">
+      <button class="btn btn-p" onclick="buscarPalabra()">Buscar</button>
+      <button class="btn btn-s" onclick="palabraSorpresa()">🎲 Sorpréndeme</button>
+    </div>
+    <div id="buscarAviso"></div>
+  </div>
+
+  <div class="card hidden" id="cardPensar">
+    <div class="emojigrande" id="pEmoji">❓</div>
+    <div class="palabra-es" id="pEs">—</div>
+    <div class="cat-tag" id="pCat">—</div>
+    <div id="pPistas"></div>
+    <input type="text" id="pIntento" placeholder="¿Cómo se dice en inglés?" autocomplete="off" style="margin-top:14px">
+    <div class="grid2" style="margin-top:10px">
+      <button class="btn btn-g" onclick="revisarIntento()">Revisar</button>
+      <button class="btn btn-s" id="btnPista" onclick="darPista()">💡 Otra pista</button>
+    </div>
+    <div id="pResultado"></div>
+    <button class="btn btn-p btn-full hidden" id="btnSiguiente" style="margin-top:10px" onclick="palabraSorpresa()">Otra palabra ➜</button>
+  </div>
+</section>
+
+<section id="s-retos" class="hidden">
+  <div class="card" id="retoIntro">
+    <div class="eyebrow">Escala de 10 paradas</div>
+    <h2>🎯 Retos</h2>
+    <p class="lead">Cuatro tipos que se van turnando: adivina por la imagen, del inglés al español, escucha y escribe, y completa la frase.</p>
+    <button class="btn btn-p btn-full" onclick="iniciarRetos()">Empezar reto</button>
+  </div>
+  <div class="card hidden" id="retoJuego">
+    <div style="display:flex;justify-content:space-between" class="mini mono">
+      <span id="retoNum">1 / 10</span><span id="retoPuntos">✅ 0</span>
+    </div>
+    <div class="barra" style="margin:8px 0 16px"><i id="retoBarra" style="width:0%;background:var(--azul)"></i></div>
+    <div id="retoCuerpo"></div>
+  </div>
+  <div class="card hidden" id="retoFin"></div>
+</section>
+
+<section id="s-errores" class="hidden">
+  <div class="card" id="errIntro">
+    <div class="eyebrow">Expediente de 20 frases</div>
+    <h2>🕵️ Cazador de Errores</h2>
+    <p class="lead">Un traductor automático tradujo estas frases… y se equivocó. Tu misión: encontrar la traducción correcta y descubrir <b>por qué</b> falló.</p>
+    <button class="btn btn-p btn-full" onclick="iniciarErrores()">Empezar la misión</button>
+  </div>
+  <div class="card hidden" id="errJuego">
+    <div style="display:flex;justify-content:space-between" class="mini mono">
+      <span id="errNum">1 / 8</span><span id="errPuntos">🕵️ 0</span>
+    </div>
+    <div class="barra" style="margin:8px 0 16px"><i id="errBarra" style="width:0%;background:var(--rojo)"></i></div>
+    <div id="errCuerpo"></div>
+  </div>
+  <div class="card hidden" id="errFin"></div>
+</section>
+
+<section id="s-dic" class="hidden">
+  <div class="card">
+    <div class="eyebrow">200 palabras · 8 temas</div>
+    <h2>📒 Mi diccionario</h2>
+    <p class="lead">Las marcadas en verde ya son tuyas: las acertaste dos veces sin ver la respuesta. Toca 🔊 para escuchar la pronunciación.</p>
+    <input type="text" id="inFiltro" placeholder="Buscar palabra…" autocomplete="off" oninput="pintarDic()">
+    <div class="filtros" id="filtrosCat"></div>
+    <div class="wlist" id="wlist"></div>
+  </div>
+</section>
+
+<section id="s-progreso" class="hidden">
+  <div class="card">
+    <div class="eyebrow">Mi pasaporte</div>
+    <h2>🛃 Mis sellos</h2>
+    <div class="kpis">
+      <div class="kpi"><b id="kPal">0</b><span>palabras que ya no necesito traducir</span></div>
+      <div class="kpi"><b id="kRacha">0</b><span>días seguidos practicando</span></div>
+      <div class="kpi"><b id="kMin">0</b><span>minutos practicando</span></div>
+      <div class="kpi"><b id="kAyuda">0</b><span>veces que pedí la respuesta</span></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="eyebrow">Fronteras cruzadas</div>
+    <h2>Por tema</h2>
+    <div id="barrasCat" style="margin-top:14px"></div>
+  </div>
+  <div class="card">
+    <div class="eyebrow">Sellos conseguidos</div>
+    <h2>Medallas</h2>
+    <div class="medallas" id="medallas"></div>
+  </div>
+  <div class="card">
+    <button class="btn btn-s btn-full" onclick="cambiarUsuario()">Cambiar de usuaria</button>
+  </div>
+</section>
+
+<section id="s-profe" class="hidden">
+  <div class="card" id="profeLogin">
+    <div class="eyebrow">Acceso restringido</div>
+    <h2>👩‍🏫 Modo profesora</h2>
+    <p class="lead">Muestra los resultados de las alumnas que usaron <b>este</b> dispositivo. Ingresa la clave.</p>
+    <input type="text" id="inPin" placeholder="Clave" autocomplete="off">
+    <button class="btn btn-p btn-full" style="margin-top:10px" onclick="entrarProfe()">Entrar</button>
+    <p class="mini" style="margin-top:8px">Clave: <b class="mono">2026</b></p>
+  </div>
+  <div class="card hidden" id="profePanel">
+    <h2>Resultados del salón</h2>
+    <p class="lead" id="profeResumen"></p>
+    <div class="scrollx"><table id="tablaProfe"></table></div>
+    <button class="btn btn-s btn-full" style="margin-top:16px" onclick="exportarCSV()">Descargar resultados (CSV para Excel)</button>
+  </div>
+</section>
+
+</div>
+
+<nav class="bottom">
+  <button data-nav="inicio" onclick="ir('inicio')" class="act"><span class="i">🏠</span>Inicio</button>
+  <button data-nav="pensar" onclick="ir('pensar')"><span class="i">🤔</span>Piensa</button>
+  <button data-nav="retos" onclick="ir('retos')"><span class="i">🎯</span>Retos</button>
+  <button data-nav="errores" onclick="ir('errores')"><span class="i">🕵️</span>Errores</button>
+  <button data-nav="dic" onclick="ir('dic')"><span class="i">📒</span>Palabras</button>
+  <button data-nav="progreso" onclick="ir('progreso')"><span class="i">🛃</span>Sellos</button>
+</nav>
+
+<script>
+const SUPABASE_URL="https://vbmmrzsztpgkjadacowa.supabase.co";
+const SUPABASE_KEY="sb_publishable_SA7pu034LGGpzmDz-C_TNA_pf89gyO-";
+class SupabaseClient{constructor(url,key){this.url=url;this.key=key;}async request(method,table,data=null,filters=null){let path=`${this.url}/rest/v1/${table}`;if(filters)path+=`?${new URLSearchParams(filters).toString()}`;const opts={method,headers:{"Content-Type":"application/json","apikey":this.key,"Authorization":`Bearer ${this.key}`}};if(data)opts.body=JSON.stringify(data);const res=await fetch(path,opts);if(!res.ok)throw new Error(`${res.status}`);return res.json();}async select(t,f=null){return this.request("GET",t,null,f);}async insert(t,d){return this.request("POST",t,d);}async update(t,d,id){return this.request("PATCH",`${t}?id=eq.${id}`,d);}}
+const DB=new SupabaseClient(SUPABASE_URL,SUPABASE_KEY);
+</script>
+<script>
+const SUPABASE_URL = 'https://vbmmrzsztpgkjadacowa.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_SA7pu034LGGpzmDz-C_TNA_pf89gyO-';
+
+class SupabaseClient {
+  constructor(url, key) {
+    this.url = url; this.key = key;
+  }
+  async request(method, table, data=null, filters=null) {
+    let path = `${this.url}/rest/v1/${table}`;
+    if(filters) path += '?' + new URLSearchParams(filters).toString();
+    const opts = {
+      method,
+      headers: {'Content-Type':'application/json','apikey':this.key,'Authorization':`Bearer ${this.key}`}
+    };
+    if(data) opts.body = JSON.stringify(data);
+    const res = await fetch(path, opts);
+    if(!res.ok) throw new Error(`${res.status}`);
+    return res.json();
+  }
+  async select(t,f=null) { return this.request('GET', t, null, f); }
+  async insert(t,d) { return this.request('POST', t, d); }
+  async update(t,d,id) { return this.request('PATCH', `${t}?id=eq.${id}`, d); }
+}
+const DB = new SupabaseClient(SUPABASE_URL, SUPABASE_KEY);
+</script>
+<script>
+/* Cruzando Fronteras de Lenguaje — Banco de palabras (200)
+   Formato: [español, inglés, emoji, ejemplo en inglés, ejemplo en español] */
+
+const CATEGORIAS = [
+  {
+    id: "animales", nombre: "Animales", emoji: "🐶", color: "#38bdf8",
+    palabras: [
+      ["perro","dog","🐶","The dog is very big.","El perro es muy grande."],
+      ["gato","cat","🐱","My cat sleeps a lot.","Mi gato duerme mucho."],
+      ["pájaro","bird","🐦","The bird can fly.","El pájaro puede volar."],
+      ["pez","fish","🐟","The fish lives in water.","El pez vive en el agua."],
+      ["caballo","horse","🐴","The horse runs fast.","El caballo corre rápido."],
+      ["vaca","cow","🐮","The cow gives us milk.","La vaca nos da leche."],
+      ["cerdo","pig","🐷","The pig is pink.","El cerdo es rosado."],
+      ["oveja","sheep","🐑","The sheep is white.","La oveja es blanca."],
+      ["pollo","chicken","🐔","The chicken eats corn.","El pollo come maíz."],
+      ["pato","duck","🦆","The duck swims in the lake.","El pato nada en el lago."],
+      ["conejo","rabbit","🐰","The rabbit eats carrots.","El conejo come zanahorias."],
+      ["ratón","mouse","🐭","The mouse is very small.","El ratón es muy pequeño."],
+      ["león","lion","🦁","The lion is strong.","El león es fuerte."],
+      ["tigre","tiger","🐯","The tiger has stripes.","El tigre tiene rayas."],
+      ["oso","bear","🐻","The bear likes honey.","Al oso le gusta la miel."],
+      ["mono","monkey","🐵","The monkey climbs the tree.","El mono sube al árbol."],
+      ["elefante","elephant","🐘","The elephant is huge.","El elefante es enorme."],
+      ["jirafa","giraffe","🦒","The giraffe has a long neck.","La jirafa tiene cuello largo."],
+      ["serpiente","snake","🐍","The snake is green.","La serpiente es verde."],
+      ["araña","spider","🕷️","The spider makes a web.","La araña hace una telaraña."],
+      ["abeja","bee","🐝","The bee makes honey.","La abeja hace miel."],
+      ["mariposa","butterfly","🦋","The butterfly is beautiful.","La mariposa es hermosa."],
+      ["tortuga","turtle","🐢","The turtle walks slowly.","La tortuga camina lento."],
+      ["rana","frog","🐸","The frog jumps high.","La rana salta alto."],
+      ["lobo","wolf","🐺","The wolf lives in the forest.","El lobo vive en el bosque."]
+    ]
+  },
+  {
+    id: "familia", nombre: "Familia y personas", emoji: "👨‍👩‍👧", color: "#f472b6",
+    palabras: [
+      ["madre","mother","👩","My mother cooks dinner.","Mi madre cocina la cena."],
+      ["padre","father","👨","My father works here.","Mi padre trabaja aquí."],
+      ["hermana","sister","👧","My sister is ten.","Mi hermana tiene diez años."],
+      ["hermano","brother","👦","My brother plays soccer.","Mi hermano juega fútbol."],
+      ["abuela","grandmother","👵","My grandmother tells stories.","Mi abuela cuenta historias."],
+      ["abuelo","grandfather","👴","My grandfather reads a book.","Mi abuelo lee un libro."],
+      ["tía","aunt","💁‍♀️","My aunt lives in Lima.","Mi tía vive en Lima."],
+      ["tío","uncle","💁‍♂️","My uncle has a car.","Mi tío tiene un carro."],
+      ["primo","cousin","🧒","My cousin is my friend.","Mi primo es mi amigo."],
+      ["bebé","baby","👶","The baby is sleeping.","El bebé está durmiendo."],
+      ["hija","daughter","👧","She is my daughter.","Ella es mi hija."],
+      ["hijo","son","👦","He is my son.","Él es mi hijo."],
+      ["amigo","friend","🤝","My friend helps me.","Mi amigo me ayuda."],
+      ["familia","family","👨‍👩‍👧","My family is big.","Mi familia es grande."],
+      ["niña","girl","👧","The girl is happy.","La niña está feliz."],
+      ["niño","boy","👦","The boy runs fast.","El niño corre rápido."],
+      ["mujer","woman","👩","The woman is a doctor.","La mujer es doctora."],
+      ["hombre","man","👨","The man is tall.","El hombre es alto."],
+      ["vecino","neighbor","🏘️","My neighbor is kind.","Mi vecino es amable."],
+      ["esposa","wife","👰","His wife is a teacher.","Su esposa es maestra."],
+      ["esposo","husband","🤵","Her husband cooks well.","Su esposo cocina bien."],
+      ["sobrina","niece","👧","My niece is five.","Mi sobrina tiene cinco años."],
+      ["sobrino","nephew","👦","My nephew likes dogs.","A mi sobrino le gustan los perros."],
+      ["persona","person","🧍","That person is my teacher.","Esa persona es mi maestra."],
+      ["gente","people","👥","Many people are here.","Mucha gente está aquí."]
+    ]
+  },
+  {
+    id: "colegio", nombre: "El colegio", emoji: "🏫", color: "#a78bfa",
+    palabras: [
+      ["escuela","school","🏫","I go to school every day.","Voy a la escuela todos los días."],
+      ["maestra","teacher","👩‍🏫","My teacher is very nice.","Mi maestra es muy amable."],
+      ["alumno","student","🧑‍🎓","The student asks a question.","El alumno hace una pregunta."],
+      ["libro","book","📖","This book is interesting.","Este libro es interesante."],
+      ["cuaderno","notebook","📓","My notebook is blue.","Mi cuaderno es azul."],
+      ["lápiz","pencil","✏️","I need a pencil.","Necesito un lápiz."],
+      ["lapicero","pen","🖊️","The pen does not work.","El lapicero no funciona."],
+      ["borrador","eraser","🧽","Can I use your eraser?","¿Puedo usar tu borrador?"],
+      ["regla","ruler","📏","I draw with a ruler.","Dibujo con una regla."],
+      ["mochila","backpack","🎒","My backpack is heavy.","Mi mochila está pesada."],
+      ["tijeras","scissors","✂️","The scissors are on the table.","Las tijeras están en la mesa."],
+      ["pegamento","glue","🧴","I need glue for my project.","Necesito pegamento para mi proyecto."],
+      ["papel","paper","📄","Give me a sheet of paper.","Dame una hoja de papel."],
+      ["pizarra","board","🪧","The teacher writes on the board.","La maestra escribe en la pizarra."],
+      ["silla","chair","🪑","Please sit on the chair.","Por favor siéntate en la silla."],
+      ["mesa","table","🗄️","The books are on the table.","Los libros están en la mesa."],
+      ["tarea","homework","📝","I do my homework at night.","Hago mi tarea en la noche."],
+      ["examen","test","📋","The test is on Monday.","El examen es el lunes."],
+      ["clase","class","📚","My class starts at eight.","Mi clase empieza a las ocho."],
+      ["pregunta","question","❓","I have a question.","Tengo una pregunta."],
+      ["respuesta","answer","✅","Your answer is correct.","Tu respuesta es correcta."],
+      ["palabra","word","🔤","This word is new for me.","Esta palabra es nueva para mí."],
+      ["número","number","🔢","Write the number here.","Escribe el número aquí."],
+      ["recreo","recess","⚽","We play at recess.","Jugamos en el recreo."],
+      ["patio","playground","🛝","The playground is big.","El patio es grande."]
+    ]
+  },
+  {
+    id: "comida", nombre: "La comida", emoji: "🍎", color: "#fb923c",
+    palabras: [
+      ["agua","water","💧","I drink water every day.","Tomo agua todos los días."],
+      ["leche","milk","🥛","The milk is cold.","La leche está fría."],
+      ["pan","bread","🍞","I eat bread for breakfast.","Como pan en el desayuno."],
+      ["queso","cheese","🧀","The cheese is yellow.","El queso es amarillo."],
+      ["huevo","egg","🥚","I want one egg.","Quiero un huevo."],
+      ["arroz","rice","🍚","We eat rice with chicken.","Comemos arroz con pollo."],
+      ["carne","meat","🥩","The meat is on the plate.","La carne está en el plato."],
+      ["atún","tuna","🍣","I eat tuna with rice.","Como atún con arroz."],
+      ["manzana","apple","🍎","The apple is red.","La manzana es roja."],
+      ["plátano","banana","🍌","The banana is yellow.","El plátano es amarillo."],
+      ["naranja","orange","🍊","This orange is sweet.","Esta naranja es dulce."],
+      ["uva","grape","🍇","I want some grapes.","Quiero unas uvas."],
+      ["fresa","strawberry","🍓","The strawberry is small.","La fresa es pequeña."],
+      ["sandía","watermelon","🍉","The watermelon is very big.","La sandía es muy grande."],
+      ["tomate","tomato","🍅","I put tomato in the salad.","Pongo tomate en la ensalada."],
+      ["papa","potato","🥔","The potato is from Peru.","La papa es del Perú."],
+      ["zanahoria","carrot","🥕","The carrot is orange.","La zanahoria es anaranjada."],
+      ["lechuga","lettuce","🥬","The lettuce is fresh.","La lechuga está fresca."],
+      ["cebolla","onion","🧅","The onion makes me cry.","La cebolla me hace llorar."],
+      ["sopa","soup","🍲","The soup is hot.","La sopa está caliente."],
+      ["ensalada","salad","🥗","I eat a salad at lunch.","Como una ensalada en el almuerzo."],
+      ["pastel","cake","🍰","The cake is for my birthday.","El pastel es para mi cumpleaños."],
+      ["galleta","cookie","🍪","I want one cookie.","Quiero una galleta."],
+      ["helado","ice cream","🍦","The ice cream is chocolate.","El helado es de chocolate."],
+      ["jugo","juice","🧃","I drink orange juice.","Tomo jugo de naranja."]
+    ]
+  },
+  {
+    id: "verbos", nombre: "Acciones (verbos)", emoji: "🏃", color: "#34d399",
+    palabras: [
+      ["comer","to eat","🍽️","I eat at twelve o'clock.","Yo como a las doce."],
+      ["beber","to drink","🥤","She drinks water.","Ella bebe agua."],
+      ["dormir","to sleep","😴","I sleep eight hours.","Duermo ocho horas."],
+      ["correr","to run","🏃","We run in the park.","Corremos en el parque."],
+      ["caminar","to walk","🚶","I walk to school.","Camino a la escuela."],
+      ["saltar","to jump","🤸","The children jump.","Los niños saltan."],
+      ["hablar","to speak","🗣️","I speak Spanish.","Yo hablo español."],
+      ["escuchar","to listen","👂","Listen to the teacher.","Escucha a la maestra."],
+      ["leer","to read","📕","I read every night.","Leo todas las noches."],
+      ["escribir","to write","✍️","Write your name here.","Escribe tu nombre aquí."],
+      ["jugar","to play","🎮","We play together.","Jugamos juntos."],
+      ["cantar","to sing","🎤","She sings very well.","Ella canta muy bien."],
+      ["bailar","to dance","💃","They dance at the party.","Ellos bailan en la fiesta."],
+      ["estudiar","to study","📚","I study English.","Yo estudio inglés."],
+      ["aprender","to learn","🧠","I want to learn more.","Quiero aprender más."],
+      ["enseñar","to teach","🧑‍🏫","She teaches math.","Ella enseña matemática."],
+      ["mirar","to watch","👀","We watch a movie.","Miramos una película."],
+      ["abrir","to open","🚪","Open the window, please.","Abre la ventana, por favor."],
+      ["cerrar","to close","🔒","Close the door.","Cierra la puerta."],
+      ["comprar","to buy","🛒","I buy bread.","Compro pan."],
+      ["ayudar","to help","🤝","Can you help me?","¿Puedes ayudarme?"],
+      ["trabajar","to work","💼","My father works a lot.","Mi padre trabaja mucho."],
+      ["vivir","to live","🏠","I live in Lima.","Vivo en Lima."],
+      ["querer","to want","🌟","I want a new book.","Quiero un libro nuevo."],
+      ["ir","to go","➡️","I go to the park.","Voy al parque."]
+    ]
+  },
+  {
+    id: "colores", nombre: "Colores y números", emoji: "🎨", color: "#facc15",
+    palabras: [
+      ["rojo","red","🔴","My shirt is red.","Mi camisa es roja."],
+      ["azul","blue","🔵","The sky is blue.","El cielo es azul."],
+      ["amarillo","yellow","🟡","The sun is yellow.","El sol es amarillo."],
+      ["verde","green","🟢","The grass is green.","El pasto es verde."],
+      ["negro","black","⚫","My shoes are black.","Mis zapatos son negros."],
+      ["blanco","white","⚪","The paper is white.","El papel es blanco."],
+      ["morado","purple","🟣","I like the purple one.","Me gusta el morado."],
+      ["rosado","pink","🌸","Her dress is pink.","Su vestido es rosado."],
+      ["celeste","light blue","🟦","Her eyes are light blue.","Sus ojos son celestes."],
+      ["marrón","brown","🟤","The bear is brown.","El oso es marrón."],
+      ["gris","gray","🩶","The cat is gray.","El gato es gris."],
+      ["uno","one","1️⃣","I have one apple.","Tengo una manzana."],
+      ["dos","two","2️⃣","I have two brothers.","Tengo dos hermanos."],
+      ["tres","three","3️⃣","There are three books.","Hay tres libros."],
+      ["cuatro","four","4️⃣","The table has four legs.","La mesa tiene cuatro patas."],
+      ["cinco","five","5️⃣","My hand has five fingers.","Mi mano tiene cinco dedos."],
+      ["seis","six","6️⃣","I am in sixth grade.","Estoy en sexto grado."],
+      ["siete","seven","7️⃣","A week has seven days.","Una semana tiene siete días."],
+      ["ocho","eight","8️⃣","Class starts at eight.","La clase empieza a las ocho."],
+      ["nueve","nine","9️⃣","She is nine years old.","Ella tiene nueve años."],
+      ["diez","ten","🔟","I count to ten.","Cuento hasta diez."],
+      ["veinte","twenty","🔢","There are twenty students.","Hay veinte alumnos."],
+      ["cien","one hundred","💯","I got one hundred points.","Saqué cien puntos."],
+      ["primero","first","🥇","She is the first one.","Ella es la primera."],
+      ["segundo","second","🥈","He is in second place.","Él está en segundo lugar."]
+    ]
+  },
+  {
+    id: "casa", nombre: "La casa y la ciudad", emoji: "🏠", color: "#60a5fa",
+    palabras: [
+      ["casa","house","🏠","My house is small.","Mi casa es pequeña."],
+      ["puerta","door","🚪","The door is open.","La puerta está abierta."],
+      ["ventana","window","🪟","The window is clean.","La ventana está limpia."],
+      ["cocina","kitchen","🍳","My mother is in the kitchen.","Mi madre está en la cocina."],
+      ["baño","bathroom","🚿","The bathroom is upstairs.","El baño está arriba."],
+      ["cama","bed","🛏️","My bed is comfortable.","Mi cama es cómoda."],
+      ["cuarto","bedroom","🛌","My bedroom is blue.","Mi cuarto es azul."],
+      ["sala","living room","🛋️","We watch TV in the living room.","Vemos tele en la sala."],
+      ["jardín","garden","🌳","There are flowers in the garden.","Hay flores en el jardín."],
+      ["techo","roof","🏚️","The roof is red.","El techo es rojo."],
+      ["piso","floor","🧱","The floor is cold.","El piso está frío."],
+      ["llave","key","🔑","I lost my key.","Perdí mi llave."],
+      ["luz","light","💡","Turn on the light.","Prende la luz."],
+      ["espejo","mirror","🪞","I look in the mirror.","Me miro en el espejo."],
+      ["refrigeradora","refrigerator","❄️","The milk is in the refrigerator.","La leche está en la refrigeradora."],
+      ["televisor","television","📺","The television is new.","El televisor es nuevo."],
+      ["teléfono","phone","📱","My phone has no battery.","Mi teléfono no tiene batería."],
+      ["computadora","computer","💻","I use the computer for homework.","Uso la computadora para la tarea."],
+      ["ciudad","city","🏙️","Lima is a big city.","Lima es una ciudad grande."],
+      ["calle","street","🛣️","The street is long.","La calle es larga."],
+      ["parque","park","🎠","We play in the park.","Jugamos en el parque."],
+      ["tienda","store","🏪","The store is closed.","La tienda está cerrada."],
+      ["mercado","market","🧺","My mother buys fruit at the market.","Mi madre compra fruta en el mercado."],
+      ["hospital","hospital","🏥","The hospital is near.","El hospital está cerca."],
+      ["iglesia","church","⛪","The church is very old.","La iglesia es muy antigua."]
+    ]
+  },
+  {
+    id: "cuerpo", nombre: "Cuerpo y ropa", emoji: "👕", color: "#f87171",
+    palabras: [
+      ["cabeza","head","🙂","My head hurts.","Me duele la cabeza."],
+      ["cabello","hair","💇","Her hair is long.","Su cabello es largo."],
+      ["ojo","eye","👁️","My eyes are brown.","Mis ojos son marrones."],
+      ["nariz","nose","👃","The clown has a big nose.","El payaso tiene una nariz grande."],
+      ["boca","mouth","👄","Open your mouth.","Abre la boca."],
+      ["oreja","ear","👂","The rabbit has long ears.","El conejo tiene orejas largas."],
+      ["diente","tooth","🦷","I brush my teeth.","Me lavo los dientes."],
+      ["mano","hand","✋","Wash your hands.","Lávate las manos."],
+      ["brazo","arm","💪","My arm is strong.","Mi brazo es fuerte."],
+      ["pierna","leg","🦵","My leg hurts.","Me duele la pierna."],
+      ["pie","foot","🦶","My foot is small.","Mi pie es pequeño."],
+      ["dedo","finger","👆","I have ten fingers.","Tengo diez dedos."],
+      ["corazón","heart","❤️","My heart beats fast.","Mi corazón late rápido."],
+      ["cara","face","😀","Wash your face.","Lávate la cara."],
+      ["camisa","shirt","👕","My shirt is white.","Mi camisa es blanca."],
+      ["pantalón","pants","👖","These pants are new.","Este pantalón es nuevo."],
+      ["vestido","dress","👗","Her dress is beautiful.","Su vestido es hermoso."],
+      ["falda","skirt","👚","The skirt is blue.","La falda es azul."],
+      ["zapato","shoe","👟","My shoes are dirty.","Mis zapatos están sucios."],
+      ["media","sock","🧦","I need clean socks.","Necesito medias limpias."],
+      ["sombrero","hat","🎩","He wears a hat.","Él usa un sombrero."],
+      ["chompa","sweater","🧥","Put on your sweater.","Ponte tu chompa."],
+      ["guante","glove","🧤","The gloves are warm.","Los guantes son abrigadores."],
+      ["gorra","cap","🧢","My cap is red.","Mi gorra es roja."],
+      ["lentes","glasses","👓","I wear glasses to read.","Uso lentes para leer."]
+    ]
+  }
+];
+
+/* CAZADOR DE ERRORES — traducciones automáticas mal hechas.
+   Cada reto: frase en español, traducción MALA, opciones, respuesta correcta y explicación. */
+const ERRORES = [
+  { es:"Estoy de acuerdo contigo.", mala:"I am of agreement with you.",
+    opciones:["I agree with you.","I am of agreement with you.","I am agree with you."], correcta:0,
+    porque:"El traductor tradujo palabra por palabra. En inglés no se dice «I am of agreement», se usa el verbo <b>agree</b>." },
+  { es:"Tengo hambre.", mala:"I have hunger.",
+    opciones:["I have hunger.","I am hungry.","I has hungry."], correcta:1,
+    porque:"En español usamos «tener» hambre, pero en inglés se usa <b>to be</b>: I <b>am</b> hungry." },
+  { es:"Tengo 12 años.", mala:"I have 12 years.",
+    opciones:["I have 12 years.","I am 12 years old.","I have 12 years old."], correcta:1,
+    porque:"La edad en inglés va con <b>to be</b>: I <b>am</b> 12 years <b>old</b>." },
+  { es:"¿Cómo te llamas?", mala:"How do you call yourself?",
+    opciones:["What is your name?","How do you call yourself?","How you call?"], correcta:0,
+    porque:"Es una expresión fija. La traducción literal suena rarísima; lo natural es <b>What is your name?</b>" },
+  { es:"Hace frío.", mala:"It makes cold.",
+    opciones:["It makes cold.","It is cold.","He makes cold."], correcta:1,
+    porque:"«Hacer» aquí no es <i>make</i>. Para el clima se usa <b>It is + adjetivo</b>." },
+  { es:"Me gusta el chocolate.", mala:"Me likes the chocolate.",
+    opciones:["Me likes the chocolate.","I like chocolate.","I likes chocolate."], correcta:1,
+    porque:"El sujeto es <b>I</b>, no «me». Y en inglés no lleva artículo: <i>chocolate</i>, no <i>the chocolate</i>." },
+  { es:"Tengo que estudiar.", mala:"I have that study.",
+    opciones:["I have to study.","I have that study.","I must to study."], correcta:0,
+    porque:"El traductor convirtió «que» en <i>that</i>. La forma correcta es <b>have to</b> + verbo." },
+  { es:"Mi madre está en la cocina.", mala:"My mother is in the cook.",
+    opciones:["My mother is in the cook.","My mother is in the kitchen.","My mother is in the cooker."], correcta:1,
+    porque:"«Cocina» tiene dos sentidos: el cuarto (<b>kitchen</b>) y cocinar (<i>cook</i>). El traductor eligió el equivocado." },
+  { es:"El banco está cerrado.", mala:"The bench is closed.",
+    opciones:["The bench is closed.","The bank is closed.","The banking is closed."], correcta:1,
+    porque:"«Banco» puede ser asiento (<i>bench</i>) o entidad (<b>bank</b>). Sin contexto, el traductor se equivoca." },
+  { es:"Voy a tomar un taxi.", mala:"I go to drink a taxi.",
+    opciones:["I go to drink a taxi.","I am going to take a taxi.","I am going to drink a taxi."], correcta:1,
+    porque:"«Tomar» no siempre es <i>drink</i>. Con transporte es <b>take</b>." },
+  { es:"Está lloviendo.", mala:"Is raining.",
+    opciones:["Is raining.","It is raining.","He is raining."], correcta:1,
+    porque:"En español el sujeto puede desaparecer, en inglés <b>no</b>. Siempre va <b>It</b>." },
+  { es:"Tengo sed.", mala:"I have thirst.",
+    opciones:["I am thirsty.","I have thirst.","I have thirsty."], correcta:0,
+    porque:"Igual que con hambre: en inglés es <b>I am thirsty</b>." },
+  { es:"Ella tiene el pelo largo.", mala:"She has the hair long.",
+    opciones:["She has the hair long.","She has long hair.","She has hair long."], correcta:1,
+    porque:"En inglés el adjetivo va <b>antes</b> del sustantivo: <i>long hair</i>, no <i>hair long</i>." },
+  { es:"Estoy aburrida.", mala:"I am boring.",
+    opciones:["I am boring.","I am bored.","I am bore."], correcta:1,
+    porque:"<b>Bored</b> = yo me aburro. <i>Boring</i> = yo aburro a los demás. ¡Cuidado con ese error!" },
+  { es:"Realmente, yo actualmente estudio inglés.", mala:"Actually, I actually study English.",
+    opciones:["Actually, I actually study English.","Actually, I currently study English.","Really, I currently study English."], correcta:2,
+    porque:"<i>Actually</i> NO significa «actualmente», significa «en realidad». Actualmente es <b>currently</b>. Son falsos amigos." },
+  { es:"Mi carpeta está sucia.", mala:"My folder is dirty.",
+    opciones:["My folder is dirty.","My desk is dirty.","My carpet is dirty."], correcta:1,
+    porque:"En Perú «carpeta» es el mueble del aula: <b>desk</b>. El traductor pensó en una carpeta de papeles." },
+  { es:"Buenos días, señora.", mala:"Good days, lady.",
+    opciones:["Good days, lady.","Good morning, ma'am.","Good day, madam lady."], correcta:1,
+    porque:"El saludo es fijo y en singular: <b>Good morning</b>. No se traduce palabra por palabra." },
+  { es:"Hace dos años que vivo aquí.", mala:"It makes two years that I live here.",
+    opciones:["It makes two years that I live here.","I have lived here for two years.","I live here since two years."], correcta:1,
+    porque:"El inglés usa <b>have lived ... for</b>. La traducción literal no existe en inglés." },
+  { es:"Por favor, apaga la luz.", mala:"For favor, off the light.",
+    opciones:["For favor, off the light.","Please, turn off the light.","Please, apagate the light."], correcta:1,
+    porque:"«Por favor» es <b>please</b> y «apagar» es el verbo compuesto <b>turn off</b>." },
+  { es:"Nos vemos mañana.", mala:"We see us tomorrow.",
+    opciones:["We see us tomorrow.","See you tomorrow.","We look tomorrow."], correcta:1,
+    porque:"Es una despedida hecha: <b>See you tomorrow</b>. Traducirla literalmente da una frase sin sentido." }
+];
+
+</script>
+<script>
+
+/* =========================================================
+   ESTADO Y GUARDADO
+   ========================================================= */
+const CLAVE = "cruzando_fronteras_v1";
+const PIN_PROFE = "2026";
+const ALM = (function(){
+  try{ localStorage.setItem("__t","1"); localStorage.removeItem("__t");
+       return { get:k=>localStorage.getItem(k), set:(k,v)=>localStorage.setItem(k,v) }; }
+  catch(e){ const m={}; return { get:k=>m[k]||null, set:(k,v)=>{m[k]=v;} }; }
+})();
+let BD = JSON.parse(ALM.get(CLAVE) || '{"perfiles":{},"actual":null}');
+let E = null;               // estado de la usuaria actual
+let PANTALLA = "inicio";
+
+// índice plano de las 200 palabras
+const TODAS = [];
+CATEGORIAS.forEach(c => c.palabras.forEach(p => TODAS.push({
+  es:p[0], en:p[1], emoji:p[2], exEn:p[3], exEs:p[4], cat:c.id, catNombre:c.nombre, color:c.color
+})));
+
+const norm = s => (s||"").toString().toLowerCase().trim()
+  .normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^a-z0-9 ]/g,"").replace(/\s+/g," ");
+const hoy = () => new Date().toISOString().slice(0,10);
+
+function nuevoPerfil(nombre){
+  return { nombre, creado:hoy(), aciertos:{}, dominadas:{}, pedidosAyuda:0,
+           intentosOk:0, intentosMal:0, retosOk:0, retosMal:0, errOk:0, errMal:0,
+           racha:0, ultimoDia:null, segundos:0, pistasUsadas:0 };
+}
+function guardar(){ if(E){ BD.perfiles[E.nombre]=E; } ALM.set(CLAVE, JSON.stringify(BD)); }
+
+function cargar(){
+  if(BD.actual && BD.perfiles[BD.actual]){
+    E = BD.perfiles[BD.actual];
+    // migración suave por si falta algún campo
+    Object.entries(nuevoPerfil(E.nombre)).forEach(([k,v]) => { if(E[k]===undefined) E[k]=v; });
+    marcarDia();
+    document.getElementById("cardNombre").classList.add("hidden");
+    document.getElementById("saludo").textContent = "¡Hola, " + E.nombre + "! Sigamos aprendiendo 💪";
+  }
+  refrescarTodo();
+}
+function marcarDia(){
+  const d = hoy();
+  if(E.ultimoDia === d) return;
+  const ayer = new Date(Date.now()-86400000).toISOString().slice(0,10);
+  E.racha = (E.ultimoDia === ayer) ? E.racha+1 : 1;
+  E.ultimoDia = d; guardar();
+}
+function guardarNombre(){
+  const n = document.getElementById("inNombre").value.trim();
+  if(!n){ document.getElementById("inNombre").focus(); return; }
+  if(!BD.perfiles[n]) BD.perfiles[n] = nuevoPerfil(n);
+  BD.actual = n; E = BD.perfiles[n]; marcarDia(); guardar(); cargar();
+}
+function cambiarUsuario(){
+  BD.actual = null; guardar(); E = null;
+  document.getElementById("cardNombre").classList.remove("hidden");
+  document.getElementById("inNombre").value = "";
+  document.getElementById("saludo").textContent = "Aprende inglés de verdad, no lo traduzcas";
+  ir("inicio"); refrescarTodo();
+}
+function pideNombre(){
+  if(E) return false;
+  ir("inicio");
+  document.getElementById("inNombre").focus();
+  return true;
+}
+
+/* tiempo dentro de la app */
+setInterval(()=>{ if(E && !document.hidden){ E.segundos += 5; guardar(); pintarChips(); } }, 5000);
+
+/* =========================================================
+   NAVEGACIÓN
+   ========================================================= */
+function ir(p){
+  PANTALLA = p;
+  document.querySelectorAll("section").forEach(s => s.classList.add("hidden"));
+  document.getElementById("s-"+p).classList.remove("hidden");
+  document.querySelectorAll("nav.bottom button").forEach(b =>
+    b.classList.toggle("act", b.dataset.nav === p));
+  window.scrollTo({top:0, behavior:"smooth"});
+  if(p==="dic") pintarDic();
+  if(p==="progreso") pintarProgreso();
+}
+
+/* =========================================================
+   DATOS DERIVADOS
+   ========================================================= */
+const dominadas = () => E ? Object.keys(E.dominadas).length : 0;
+const minutos  = () => E ? Math.round(E.segundos/60) : 0;
+
+function pintarChips(){
+  document.getElementById("chipRacha").textContent = E ? E.racha : 0;
+  document.getElementById("chipPal").textContent   = dominadas();
+  document.getElementById("chipMin").textContent   = minutos();
+}
+function refrescarTodo(){
+  pintarChips(); pintarRetoHoy();
+  if(PANTALLA==="dic") pintarDic();
+  if(PANTALLA==="progreso") pintarProgreso();
+}
+function pintarRetoHoy(){
+  const t = document.getElementById("retoHoy");
+  if(!E){ t.textContent = "Escribe tu nombre arriba para empezar a guardar tu progreso."; return; }
+  const faltan = 200 - dominadas();
+  t.innerHTML = dominadas() === 0
+    ? "Meta de hoy: hacer tuyas tus <b>primeras 3 palabras</b>. Una palabra es tuya cuando la aciertas <b>dos veces</b> sin ver la respuesta."
+    : `Llevas <b>${dominadas()}</b> palabras tuyas y te faltan <b>${faltan}</b>. Meta de hoy: <b>+3 palabras</b> nuevas. 🔥 Racha: ${E.racha} día(s).`;
+}
+
+function acertar(w){
+  E.aciertos[w.en] = (E.aciertos[w.en]||0) + 1;
+  if(E.aciertos[w.en] >= 2 && !E.dominadas[w.en]) E.dominadas[w.en] = hoy();
+  guardar(); pintarChips();
+}
+
+/* audio */
+function decir(txt){
+  try{
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(txt);
+    u.lang = "en-US"; u.rate = .85;
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+
+/* =========================================================
+   PIENSA PRIMERO
+   ========================================================= */
+let W = null, nivelPista = 0, fallos = 0, resuelta = false;
+
+function buscarPalabra(){
+  if(pideNombre()) return;
+  const q = norm(document.getElementById("inBuscar").value);
+  const av = document.getElementById("buscarAviso");
+  if(!q){ av.innerHTML=""; return; }
+  const w = TODAS.find(x => norm(x.es) === q) || TODAS.find(x => norm(x.es).startsWith(q));
+  if(!w){
+    av.innerHTML = `<div class="aviso info">Todavía no tengo esa palabra en mi diccionario de 200.
+      Pero recuerda: antes de correr al traductor, <b>mira el contexto de la frase</b> e intenta adivinar.
+      Prueba con otra palabra o toca <b>🎲 Sorpréndeme</b>.</div>`;
+    document.getElementById("cardPensar").classList.add("hidden");
+    return;
+  }
+  av.innerHTML = ""; abrirPalabra(w);
+}
+function palabraSorpresa(){
+  if(pideNombre()) return;
+  document.getElementById("buscarAviso").innerHTML = "";
+  // prioriza las que aún no domina
+  const pend = TODAS.filter(w => !E.dominadas[w.en]);
+  const lista = pend.length ? pend : TODAS;
+  abrirPalabra(lista[Math.floor(Math.random()*lista.length)]);
+}
+function abrirPalabra(w){
+  W = w; nivelPista = 0; fallos = 0; resuelta = false;
+  document.getElementById("cardPensar").classList.remove("hidden");
+  document.getElementById("pEmoji").textContent = w.emoji;
+  document.getElementById("pEs").textContent = w.es;
+  document.getElementById("pCat").textContent = w.catNombre;
+  document.getElementById("pPistas").innerHTML = "";
+  document.getElementById("pResultado").innerHTML = "";
+  document.getElementById("pIntento").value = "";
+  document.getElementById("btnPista").disabled = false;
+  document.getElementById("btnSiguiente").classList.add("hidden");
+  darPista();
+  document.getElementById("cardPensar").scrollIntoView({behavior:"smooth", block:"start"});
+}
+function darPista(){
+  if(!W) return;
+  nivelPista++;
+  const cont = document.getElementById("pPistas");
+  let html = "";
+  if(nivelPista === 1){
+    html = `<b>Pista 1 · Tema:</b> ${W.catNombre} ${W.emoji}. Piensa si ya la escuchaste en una canción, un juego o una película.`;
+  } else if(nivelPista === 2){
+    const letras = W.en.replace("to ","");
+    html = `<b>Pista 2 · Forma:</b> empieza con «<b>${letras[0].toUpperCase()}</b>» y tiene <b>${letras.replace(/ /g,"").length}</b> letras.`;
+    E.pistasUsadas++; guardar();
+  } else if(nivelPista === 3){
+    const letras = W.en.replace("to ","");
+    const hueco = W.exEn.replace(new RegExp(letras,"i"), "______");
+    html = `<b>Pista 3 · En una frase:</b> «${hueco}»<br><span class="mini">${W.exEs}</span>`;
+    E.pistasUsadas++; guardar();
+  } else {
+    html = `<b>Última ayuda:</b> escríbela como suena y revisa. ¡Inténtalo, aunque te equivoques se aprende!`;
+    document.getElementById("btnPista").disabled = true;
+  }
+  const d = document.createElement("div");
+  d.className = "pista"; d.innerHTML = html;
+  cont.appendChild(d);
+}
+function revisarIntento(){
+  if(!W || resuelta) return;
+  const r = document.getElementById("pResultado");
+  const dado = norm(document.getElementById("pIntento").value);
+  if(!dado) return;
+  const bueno = norm(W.en);
+  const sinTo = bueno.replace(/^to /,"");
+  if(dado === bueno || dado === sinTo){
+    resuelta = true;
+    acertar(W);
+    const veces = E.aciertos[W.en];
+    r.innerHTML = `<div class="aviso ok">🎉 <b>¡Correcto!</b> ${W.es} = <b>${W.en}</b>
+      <div style="margin-top:6px">${W.exEn}<br><span class="mini">${W.exEs}</span></div>
+      <div style="margin-top:8px">${veces>=2 ? "⭐ <b>Esta palabra ya es tuya.</b> No necesitas traductor para ella." : "Aciértala una vez más y será oficialmente tuya."}</div></div>`;
+    decir(W.en.replace("to ",""));
+    document.getElementById("btnSiguiente").classList.remove("hidden");
+    E.intentosOk++; guardar(); pintarRetoHoy();
+  } else {
+    fallos++;
+    E.intentosMal++; guardar();
+    if(fallos < 2){
+      r.innerHTML = `<div class="aviso mal">Todavía no. Mira otra pista y vuelve a intentar 💪</div>`;
+      darPista();
+    } else {
+      resuelta = true;
+      E.pedidosAyuda++; guardar();
+      r.innerHTML = `<div class="aviso info">La respuesta es <b>${W.en}</b>.
+        <div style="margin-top:6px">${W.exEn}<br><span class="mini">${W.exEs}</span></div>
+        <div style="margin-top:8px">La guardé en tu diccionario. Te la voy a volver a preguntar en los retos hasta que sea tuya.</div></div>`;
+      decir(W.en.replace("to ",""));
+      document.getElementById("btnSiguiente").classList.remove("hidden");
+    }
+  }
+}
+document.getElementById("pIntento").addEventListener("keydown", e => { if(e.key==="Enter") revisarIntento(); });
+document.getElementById("inBuscar").addEventListener("keydown", e => { if(e.key==="Enter") buscarPalabra(); });
+document.getElementById("inNombre").addEventListener("keydown", e => { if(e.key==="Enter") guardarNombre(); });
+
+/* =========================================================
+   RETOS
+   ========================================================= */
+let RETO = null;
+function mezclar(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+function distractores(w, campo, n){
+  const pool = mezclar(TODAS.filter(x => x.en !== w.en && x.cat === w.cat));
+  const extra = mezclar(TODAS.filter(x => x.en !== w.en));
+  const res = [];
+  for(const c of pool.concat(extra)){ if(res.length>=n) break; if(!res.some(r=>r[campo]===c[campo])) res.push(c); }
+  return res;
+}
+
+function iniciarRetos(){
+  if(pideNombre()) return;
+  const pend = TODAS.filter(w => !E.dominadas[w.en]);
+  const base = mezclar(pend.length >= 10 ? pend : TODAS).slice(0,10);
+  RETO = { lista: base, i:0, ok:0, respondida:false };
+  document.getElementById("retoIntro").classList.add("hidden");
+  document.getElementById("retoFin").classList.add("hidden");
+  document.getElementById("retoJuego").classList.remove("hidden");
+  pintarReto();
+}
+function pintarReto(){
+  const r = RETO, w = r.lista[r.i];
+  r.respondida = false;
+  document.getElementById("retoNum").textContent = (r.i+1)+" / "+r.lista.length;
+  document.getElementById("retoPuntos").textContent = "✅ "+r.ok;
+  document.getElementById("retoBarra").style.width = (r.i/r.lista.length*100)+"%";
+  const tipo = r.i % 4;   // los cuatro tipos rotan
+  const c = document.getElementById("retoCuerpo");
+
+  if(tipo === 0){          // emoji -> inglés
+    const ops = mezclar([w].concat(distractores(w,"en",3)));
+    c.innerHTML = `<div class="emojigrande">${w.emoji}</div>
+      <div class="palabra-es">${w.es}</div>
+      <p class="lead centro">¿Cómo se dice en inglés?</p>
+      <div class="ops">${ops.map(o=>`<button class="op" data-v="${o.en}">${o.en}</button>`).join("")}</div>`;
+    ligarOps(w.en, w);
+  } else if(tipo === 1){   // inglés -> español
+    const ops = mezclar([w].concat(distractores(w,"es",3)));
+    c.innerHTML = `<div class="emojigrande">🔤</div>
+      <div class="palabra-es">${w.en}</div>
+      <p class="lead centro">¿Qué significa en español?</p>
+      <div class="ops">${ops.map(o=>`<button class="op" data-v="${o.es}">${o.es}</button>`).join("")}</div>`;
+    ligarOps(w.es, w);
+  } else if(tipo === 2){   // escucha y escribe
+    c.innerHTML = `<div class="centro"><button class="btn btn-s" onclick="decir('${w.en.replace("to ","")}')" style="font-size:1.6rem;padding:18px 26px">🔊 Escuchar</button></div>
+      <p class="lead centro" style="margin-top:12px">Escucha y escribe la palabra en inglés. (Pista: significa «<b>${w.es}</b>»)</p>
+      <input type="text" id="retoInput" placeholder="Escribe aquí…" autocomplete="off">
+      <button class="btn btn-g btn-full" style="margin-top:10px" onclick="revisarEscrito('${w.en.replace(/'/g,"")}')">Revisar</button>
+      <div id="retoFb"></div>`;
+    setTimeout(()=>decir(w.en.replace("to ","")), 350);
+    ligarEnter(w);
+  } else {                 // completa la frase
+    const letras = w.en.replace("to ","");
+    const hueco = w.exEn.replace(new RegExp(letras,"i"), "______");
+    c.innerHTML = `<div class="emojigrande">${w.emoji}</div>
+      <p class="lead centro">Completa la frase en inglés:</p>
+      <div class="palabra-es" style="font-size:1.15rem;line-height:1.5">${hueco}</div>
+      <p class="mini centro">${w.exEs}</p>
+      <input type="text" id="retoInput" placeholder="La palabra que falta…" autocomplete="off" style="margin-top:12px">
+      <button class="btn btn-g btn-full" style="margin-top:10px" onclick="revisarEscrito('${letras.replace(/'/g,"")}')">Revisar</button>
+      <div id="retoFb"></div>`;
+    ligarEnter(w);
+  }
+  RETO.actual = w;
+}
+function ligarOps(correcta, w){
+  document.querySelectorAll("#retoCuerpo .op").forEach(b => b.onclick = () => {
+    if(RETO.respondida) return; RETO.respondida = true;
+    const bien = b.dataset.v === correcta;
+    document.querySelectorAll("#retoCuerpo .op").forEach(x => {
+      const cl = x.dataset.v === correcta ? "buena" : (x===b ? "mala" : null);
+      if(cl) x.classList.add(cl);
+    });
+    if(bien){ RETO.ok++; E.retosOk++; acertar(w); decir(w.en.replace("to ","")); }
+    else { E.retosMal++; }
+    guardar();
+    setTimeout(avanzarReto, bien ? 700 : 1500);
+  });
+}
+function ligarEnter(w){
+  const inp = document.getElementById("retoInput");
+  if(inp){ inp.focus(); inp.addEventListener("keydown", e => {
+    if(e.key==="Enter") revisarEscrito(w.en.replace("to ","")); }); }
+}
+function revisarEscrito(correcta){
+  if(RETO.respondida) return;
+  const inp = document.getElementById("retoInput");
+  const fb = document.getElementById("retoFb");
+  if(!inp.value.trim()) return;
+  RETO.respondida = true;
+  const w = RETO.actual;
+  const bien = norm(inp.value) === norm(correcta);
+  if(bien){ RETO.ok++; E.retosOk++; acertar(w); fb.innerHTML = `<div class="aviso ok">🎉 ¡Muy bien! <b>${correcta}</b></div>`; }
+  else { E.retosMal++; fb.innerHTML = `<div class="aviso mal">Casi. La respuesta era <b>${correcta}</b>.<br><span class="mini">${w.exEn} — ${w.exEs}</span></div>`; }
+  guardar(); decir(correcta);
+  setTimeout(avanzarReto, bien ? 900 : 2200);
+}
+function avanzarReto(){
+  RETO.i++;
+  if(RETO.i < RETO.lista.length){ pintarReto(); return; }
+  document.getElementById("retoJuego").classList.add("hidden");
+  const fin = document.getElementById("retoFin");
+  const p = RETO.ok, total = RETO.lista.length;
+  const msg = p>=9 ? "¡Increíble! Casi no necesitaste ayuda 🌟"
+            : p>=7 ? "¡Muy bien! Vas por buen camino 💪"
+            : p>=5 ? "Buen intento. Repite el reto y verás la diferencia."
+            : "Tranquila, equivocarse es parte de aprender. Repite el reto 🙂";
+  fin.innerHTML = `<div class="centro"><div class="emojigrande">${p>=7?"🏆":"🌱"}</div>
+    <h2>${p} de ${total} correctas</h2><p class="lead">${msg}</p></div>
+    <button class="btn btn-p btn-full" onclick="iniciarRetos()">Otro reto</button>
+    <button class="btn btn-s btn-full" style="margin-top:8px" onclick="ir('progreso')">Ver mi progreso</button>`;
+  fin.classList.remove("hidden");
+  document.getElementById("retoIntro").classList.remove("hidden");
+  pintarRetoHoy();
+}
+
+/* =========================================================
+   CAZADOR DE ERRORES
+   ========================================================= */
+let CAZ = null;
+function iniciarErrores(){
+  if(pideNombre()) return;
+  CAZ = { lista: mezclar(ERRORES).slice(0,8), i:0, ok:0, respondida:false };
+  document.getElementById("errIntro").classList.add("hidden");
+  document.getElementById("errFin").classList.add("hidden");
+  document.getElementById("errJuego").classList.remove("hidden");
+  pintarError();
+}
+function pintarError(){
+  const c = CAZ, q = c.lista[c.i];
+  c.respondida = false;
+  document.getElementById("errNum").textContent = (c.i+1)+" / "+c.lista.length;
+  document.getElementById("errPuntos").textContent = "🕵️ "+c.ok;
+  document.getElementById("errBarra").style.width = (c.i/c.lista.length*100)+"%";
+  const orden = mezclar(q.opciones.map((t,idx)=>({t, bien: idx===q.correcta})));
+  document.getElementById("errCuerpo").innerHTML = `
+    <p class="mini">Frase original en español</p>
+    <div class="palabra-es" style="font-size:1.2rem">«${q.es}»</div>
+    <div class="aviso mal" style="margin-top:12px">🤖 El traductor automático dijo:<br><b>“${q.mala}”</b></div>
+    <p class="lead" style="margin-top:14px">¿Cuál es la traducción <b>correcta</b>?</p>
+    <div class="ops">${orden.map((o,i)=>`<button class="op" data-i="${i}">${o.t}</button>`).join("")}</div>
+    <div id="errFb"></div>`;
+  document.querySelectorAll("#errCuerpo .op").forEach(b => b.onclick = () => {
+    if(c.respondida) return; c.respondida = true;
+    const el = orden[+b.dataset.i];
+    document.querySelectorAll("#errCuerpo .op").forEach((x,i) => {
+      const cl = orden[i].bien ? "buena" : (x===b ? "mala" : null);
+      if(cl) x.classList.add(cl);
+    });
+    if(el.bien){ c.ok++; E.errOk++; } else { E.errMal++; }
+    guardar();
+    document.getElementById("errFb").innerHTML =
+      `<div class="aviso ${el.bien?"ok":"info"}" style="margin-top:14px">
+        ${el.bien ? "🎉 <b>¡Bien cazado!</b><br>" : "🔎 <b>Mira por qué:</b><br>"}${q.porque}</div>
+       <button class="btn btn-p btn-full" style="margin-top:12px" onclick="avanzarError()">Siguiente ➜</button>`;
+  });
+}
+function avanzarError(){
+  CAZ.i++;
+  if(CAZ.i < CAZ.lista.length){ pintarError(); return; }
+  document.getElementById("errJuego").classList.add("hidden");
+  const fin = document.getElementById("errFin");
+  fin.innerHTML = `<div class="centro"><div class="emojigrande">${CAZ.ok>=6?"🥇":"🔍"}</div>
+    <h2>Cazaste ${CAZ.ok} de ${CAZ.lista.length}</h2>
+    <p class="lead">Recuerda: el traductor traduce <b>palabras</b>, no <b>ideas</b>. Por eso hay que entender lo que uno escribe.</p></div>
+    <button class="btn btn-p btn-full" onclick="iniciarErrores()">Otra misión</button>`;
+  fin.classList.remove("hidden");
+  document.getElementById("errIntro").classList.remove("hidden");
+}
+
+/* =========================================================
+   DICCIONARIO
+   ========================================================= */
+let catFiltro = "todas";
+function pintarFiltros(){
+  const c = document.getElementById("filtrosCat");
+  c.innerHTML = `<button class="${catFiltro==="todas"?"act":""}" onclick="setCat('todas')">Todas (200)</button>` +
+    CATEGORIAS.map(k=>`<button class="${catFiltro===k.id?"act":""}" onclick="setCat('${k.id}')">${k.emoji} ${k.nombre}</button>`).join("");
+}
+function setCat(id){ catFiltro = id; pintarDic(); }
+function pintarDic(){
+  pintarFiltros();
+  const q = norm(document.getElementById("inFiltro").value);
+  const lista = TODAS.filter(w =>
+    (catFiltro==="todas" || w.cat===catFiltro) &&
+    (!q || norm(w.es).includes(q) || norm(w.en).includes(q)));
+  document.getElementById("wlist").innerHTML = lista.map(w => {
+    const dom = E && E.dominadas[w.en];
+    return `<div class="w ${dom?"dom":""}">
+      <span class="e">${w.emoji}</span>
+      <span class="txt"><b>${w.es} → ${w.en}</b><span>${w.exEn} · ${w.exEs}</span></span>
+      ${dom?'<span title="ya es tuya">⭐</span>':''}
+      <button class="snd" onclick="decir('${w.en.replace("to ","").replace(/'/g,"")}')">🔊</button>
+    </div>`;
+  }).join("") || `<p class="lead">No encontré esa palabra.</p>`;
+}
+
+/* =========================================================
+   PROGRESO Y MEDALLAS
+   ========================================================= */
+const MEDALLAS = [
+  {e:"🌱", n:"Primeras 5 palabras",   ok:E=>dominadas()>=5},
+  {e:"📗", n:"25 palabras mías",       ok:E=>dominadas()>=25},
+  {e:"📘", n:"50 palabras mías",       ok:E=>dominadas()>=50},
+  {e:"🎓", n:"100 palabras mías",      ok:E=>dominadas()>=100},
+  {e:"👑", n:"¡Las 200!",              ok:E=>dominadas()>=200},
+  {e:"🔥", n:"3 días seguidos",        ok:E=>E.racha>=3},
+  {e:"⚡", n:"7 días seguidos",        ok:E=>E.racha>=7},
+  {e:"🕵️", n:"20 errores cazados",    ok:E=>E.errOk>=20},
+  {e:"🧠", n:"50 retos correctos",     ok:E=>E.retosOk>=50},
+  {e:"💪", n:"10 aciertos sin pistas", ok:E=>E.intentosOk>=10},
+  {e:"⏱️", n:"60 minutos jugando",     ok:E=>minutos()>=60},
+  {e:"🌍", n:"Todos los temas tocados",ok:E=>CATEGORIAS.every(c=>c.palabras.some(p=>E.dominadas[p[1]]))}
+];
+function pintarProgreso(){
+  if(!E){ ir("inicio"); return; }
+  document.getElementById("kPal").textContent   = dominadas();
+  document.getElementById("kRacha").textContent = E.racha;
+  document.getElementById("kMin").textContent   = minutos();
+  document.getElementById("kAyuda").textContent = E.pedidosAyuda;
+  document.getElementById("barrasCat").innerHTML = CATEGORIAS.map(c => {
+    const n = c.palabras.filter(p => E.dominadas[p[1]]).length;
+    const pct = Math.round(n/c.palabras.length*100);
+    return `<div class="rowcat"><div class="t"><span>${c.emoji} ${c.nombre}</span><span>${n}/${c.palabras.length}</span></div>
+      <div class="barra"><i style="width:${pct}%;background:${c.color}"></i></div></div>`;
+  }).join("");
+  document.getElementById("medallas").innerHTML = MEDALLAS.map(m =>
+    `<div class="med ${m.ok(E)?"":"off"}"><div class="e">${m.e}</div><div class="n">${m.n}</div></div>`).join("");
+}
+
+/* =========================================================
+   MODO PROFESORA
+   ========================================================= */
+function entrarProfe(){
+  if(document.getElementById("inPin").value.trim() !== PIN_PROFE){
+    alert("Clave incorrecta."); return;
+  }
+  document.getElementById("profeLogin").classList.add("hidden");
+  document.getElementById("profePanel").classList.remove("hidden");
+  pintarProfe();
+}
+function filasProfe(){
+  return Object.values(BD.perfiles).map(p => {
+    const dom = Object.keys(p.dominadas||{}).length;
+    const totalR = (p.retosOk||0)+(p.retosMal||0);
+    const pct = totalR ? Math.round((p.retosOk||0)/totalR*100) : 0;
+    return { nombre:p.nombre, dom, min:Math.round((p.segundos||0)/60), racha:p.racha||0,
+             pct, ayuda:p.pedidosAyuda||0, err:(p.errOk||0), pistas:(p.pistasUsadas||0) };
+  }).sort((a,b)=>b.dom-a.dom);
+}
+function pintarProfe(){
+  const f = filasProfe();
+  const prom = f.length ? Math.round(f.reduce((s,x)=>s+x.dom,0)/f.length) : 0;
+  const promAyuda = f.length ? (f.reduce((s,x)=>s+x.ayuda,0)/f.length).toFixed(1) : 0;
+  document.getElementById("profeResumen").innerHTML =
+    `<b>${f.length}</b> alumna(s) registrada(s) en esta computadora. Promedio de palabras dominadas: <b>${prom}</b> de 200.
+     Promedio de veces que pidieron la respuesta (dependencia del traductor): <b>${promAyuda}</b>.`;
+  document.getElementById("tablaProfe").innerHTML =
+    `<tr><th>Alumna</th><th>Palabras<br>dominadas</th><th>% aciertos<br>en retos</th><th>Pidió la<br>respuesta</th><th>Pistas<br>usadas</th><th>Errores<br>cazados</th><th>Min</th><th>Racha</th></tr>` +
+    (f.length ? f.map(x=>`<tr><td><b>${x.nombre}</b></td><td>${x.dom}</td><td>${x.pct}%</td><td>${x.ayuda}</td><td>${x.pistas}</td><td>${x.err}</td><td>${x.min}</td><td>${x.racha}</td></tr>`).join("")
+              : `<tr><td colspan="8">Todavía no hay alumnas registradas.</td></tr>`);
+}
+function exportarCSV(){
+  const f = filasProfe();
+  const filas = [["Alumna","Palabras dominadas","% aciertos retos","Veces que pidio la respuesta","Pistas usadas","Errores cazados","Minutos","Racha"]]
+    .concat(f.map(x=>[x.nombre,x.dom,x.pct,x.ayuda,x.pistas,x.err,x.min,x.racha]));
+  const csv = filas.map(r=>r.join(";")).join(String.fromCharCode(10));
+  // 1) intenta descargar el archivo (funciona al abrir la app desde la carpeta)
+  let descargo = false;
+  try{
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob(["﻿"+csv], {type:"text/csv;charset=utf-8"}));
+    a.download = "resultados_cruzando_fronteras.csv";
+    document.body.appendChild(a); a.click(); a.remove(); descargo = true;
+  }catch(e){}
+  // 2) y siempre deja el texto listo para copiar y pegar en Excel
+  let caja = document.getElementById("cajaCSV");
+  if(!caja){
+    caja = document.createElement("div"); caja.id = "cajaCSV";
+    document.getElementById("profePanel").appendChild(caja);
+  }
+  caja.innerHTML = `<p class="mini" style="margin-top:14px">${descargo ? "Si no encuentras el archivo descargado, copia" : "Copia"} este texto y pégalo en Excel (menú <b>Datos → Texto en columnas → separado por punto y coma</b>):</p>
+    <textarea readonly rows="7" style="width:100%;font-family:'JetBrains Mono',monospace;font-size:.78rem;padding:10px;border-radius:10px;border:1.5px solid var(--linea);background:var(--papel);color:var(--tinta)">${csv}</textarea>`;
+  const ta = caja.querySelector("textarea"); ta.focus(); ta.select();
+}
+
+/* arranque */
+cargar();
+pintarFiltros();
+
+</script>
